@@ -3,22 +3,28 @@ import TextField from '@mui/material/TextField';
 import { useFormik } from "formik";
 import { func } from 'prop-types';
 import { useEffect } from 'react';
-import { Navigate } from 'react-router';
+import { Navigate, useParams } from 'react-router-dom';
 
 export const InatialTest = () => {
 
-    const type = useParams();
-
+ const {typeId} = useParams();
+//  console.log(typeId)
+// const handleClick=(values)=>{
+//    console.log("cfjjhdfgjh")
+// }
     const { handleSubmit, values, handleBlur, handleChange, getFieldProps } = useFormik({
         initialValues: {
             birthDate: new Date(),
             height: 0,
             weight: 0
         },
+        onClick:(values)=>{console.log("bvfjkd")},
         onSubmit: (values) => {
+            console.log("jjkglf;njk")
+             Navigate("/donater");
             const check = check(values.birthDate, values.height, values.weight);
             if (typeof check == "boolean") {
-                if (type === "donater")
+                if (typeId === "donater")
                     Navigate("/donater")
                 else Navigate("/needsDonation")
             }
@@ -28,7 +34,7 @@ export const InatialTest = () => {
         },
 
     })
-    check = (birthDate, height, weight) => {
+   const check = (birthDate, height, weight) => {
         const age = calculateAge(birthDate);
         const bmi = calculateBMI(height, weight);
         if (age < 20) {
@@ -38,6 +44,9 @@ export const InatialTest = () => {
         if (bmi < 18.5 || bmi > 24.9) {
             return "we are sorry your bmi does not stand in the criteria"
         }
+        git add .
+git commit -a -m "Notes about the commit"
+git push origin main 
         return true;
     }
     function calculateAge(birthDate) {
@@ -72,7 +81,7 @@ export const InatialTest = () => {
                     <TextField onChange={handleChange} id="margin-none" label="wight" variant="outlined" />
 
                 </div>
-                <Button type='submit' variant="text">ok</Button>
+                 <Button type='submit' /*onClick={handleClick(values)}*/ variant="text">ok</Button> 
             </Box>
             {/* <Box
       sx={{
