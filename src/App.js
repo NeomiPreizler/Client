@@ -6,14 +6,13 @@ import "./App.css";
 import useToken from './pages/useToken';
 import{BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import { NavLink } from "react-router-dom";
-import { InatialTest } from "./pages/startToRegister/initialTest";
-
+import InitialTest from './pages/startToRegister/index'
 
 const routes = [
   {path:"/",component:Home},
   {path:"/register",component:Register},
   {path:"/login",component:Login},
-  {path:"/StartToRegeste/:typeUser",component:InatialTest},
+  {path:"StartToRegister/:typeId",component:InitialTest},
   //{path:"/register",component:Register},
 ]
 function App() {
@@ -51,6 +50,7 @@ function App() {
         <Route path="/login" element={<Login/>}> </Route> 
         <Route path="/register" element={<Register/>}></Route>
         <Route path="/" element={<Home/>}></Route>
+        <Route path="StartToRegister/:typeId" element={<InitialTest/>}></Route>
       </Routes> 
     </Router>
     </> 

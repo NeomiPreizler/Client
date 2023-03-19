@@ -2,13 +2,13 @@ import { Box, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useFormik } from "formik";
 import { func } from 'prop-types';
-import { typeOf } from 'react-is';
-import { Navigate, useParams } from 'react-router';
-import { boolean } from 'yargs';
+import { useEffect } from 'react';
+import { Navigate } from 'react-router';
 
-export const InatialTest = ({typeUser}) => {
+export const InatialTest = () => {
 
-    const type=useParams();
+    const type = useParams();
+
     const { handleSubmit, values, handleBlur, handleChange, getFieldProps } = useFormik({
         initialValues: {
             birthDate: new Date(),
@@ -18,15 +18,17 @@ export const InatialTest = ({typeUser}) => {
         onSubmit: (values) => {
             const check = check(values.birthDate, values.height, values.weight);
             if (typeof check == "boolean") {
-                Navigate("/")
+                if (type === "donater")
+                    Navigate("/donater")
+                else Navigate("/needsDonation")
             }
             else {
-
+                alert('nothing ');
             }
         },
 
     })
-    function check(birthDate, height, weight) {
+    check = (birthDate, height, weight) => {
         const age = calculateAge(birthDate);
         const bmi = calculateBMI(height, weight);
         if (age < 20) {
@@ -40,18 +42,19 @@ export const InatialTest = ({typeUser}) => {
     }
     function calculateAge(birthDate) {
         const correntDate = new Date();
-        const diff = Math.abs(correntDate - date);
+        const diff = Math.abs(correntDate - birthDate);
         const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
         return age
     }
     function calculateBMI(weight, height) {
-        bmi = (weight / Math.pow((height / 100), 2)).toFixed(1);
+        const bmi = (weight / Math.pow((height / 100), 2)).toFixed(1);
         return bmi;
     }
 
 
     return (
         <>
+
             <Box
                 component="form"
                 sx={{
@@ -69,7 +72,7 @@ export const InatialTest = ({typeUser}) => {
                     <TextField onChange={handleChange} id="margin-none" label="wight" variant="outlined" />
 
                 </div>
-                <Button type='submit' variant="text" onClick={() => { func() }}>ok</Button>
+                <Button type='submit' variant="text">ok</Button>
             </Box>
             {/* <Box
       sx={{
@@ -83,3 +86,5 @@ export const InatialTest = ({typeUser}) => {
         </>
     )
 }
+
+export default InatialTest;
