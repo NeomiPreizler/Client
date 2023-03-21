@@ -1,40 +1,49 @@
-import { Box, Button } from '@mui/material';
-import TextField from '@mui/material/TextField';
+import { TextField, Box, Button } from '@mui/material';
 import { useFormik } from "formik";
 import { func } from 'prop-types';
 import { useEffect } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import * as yup from 'yup';
 
+
+const validationSchema = yup.object({
+    height: yup
+        .number('Enter valid number')
+        .required('Height is required'),
+});
 export const InatialTest = () => {
+    const navigate = useNavigate()
 
- const {typeId} = useParams();
-//  console.log(typeId)
-// const handleClick=(values)=>{
-//    console.log("cfjjhdfgjh")
-// }
-    const { handleSubmit, values, handleBlur, handleChange, getFieldProps } = useFormik({
+    const { type } = useParams();
+    console.log({ type });
+    const onSubmit = (values) => {
+        console.log("on submit")
+        const check = true;
+        if (typeof check == "boolean") {
+            if (type === "donater")
+                navigate("/donater")
+            else navigate("/needs-donation")
+        }
+        else {
+            alert(`${check}`);
+        }
+    }
+
+    const { handleSubmit, getFieldProps, errors } = useFormik({
         initialValues: {
             birthDate: new Date(),
-            height: 0,
+            height: undefined,
             weight: 0
         },
-        onClick:(values)=>{console.log("bvfjkd")},
-        onSubmit: (values) => {
-            console.log("jjkglf;njk")
-             Navigate("/donater");
-            const check = check(values.birthDate, values.height, values.weight);
-            if (typeof check == "boolean") {
-                if (typeId === "donater")
-                    Navigate("/donater")
-                else Navigate("/needsDonation")
-            }
-            else {
-                alert('nothing ');
-            }
-        },
-
+        validationSchema,
+        onSubmit,
     })
-   const check = (birthDate, height, weight) => {
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    // };
+
+    const checkDitials = (birthDate, height, weight) => {
         const age = calculateAge(birthDate);
         const bmi = calculateBMI(height, weight);
         if (age < 20) {
@@ -44,9 +53,6 @@ export const InatialTest = () => {
         if (bmi < 18.5 || bmi > 24.9) {
             return "we are sorry your bmi does not stand in the criteria"
         }
-        git add .
-git commit -a -m "Notes about the commit"
-git push origin main 
         return true;
     }
     function calculateAge(birthDate) {
@@ -64,26 +70,49 @@ git push origin main
     return (
         <>
 
-            <Box
-                component="form"
+            {/* <Box  */}
+            <form onSubmit={handleSubmit}
+                // component="form"
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
                 }}
-                noValidate
+                // noValidate
                 autoComplete="off"
             >
-                <div>
 
-                    <TextField type="date" onChange={handleChange} id="margin-none" label="Date Of Birth" variant="outlined" />
-                    <br></br><br></br>
-                    <TextField onChange={handleChange} id="margin-none" label="hight" variant="outlined" />
-                    <br></br><br></br>
-                    <TextField onChange={handleChange} id="margin-none" label="wight" variant="outlined" />
+                <TextField
+                    type="date"
+                    id="margin-none"
+                    label="Date Of Birth"
+                    variant="outlined"
+                    {...getFieldProps("birthDate")
+                    }
 
-                </div>
-                 <Button type='submit' /*onClick={handleClick(values)}*/ variant="text">ok</Button> 
-            </Box>
-            {/* <Box
+                />
+                <br></br><br></br>
+                <TextField
+                    id="margin-none"
+                    label="height"
+                    variant="outlined"
+                    error={errors?.height}
+                    helperText={errors?.height}
+
+                    {...getFieldProps("height")
+                    } />
+                <br></br><br></br>
+                <TextField
+                    name="weight"
+                    id="margin-none"
+                    label="wight"
+                    variant="outlined"
+                    {...getFieldProps("weight")
+                    } />
+
+
+
+                <Button type='submit' variant="text">ok</Button>
+                {/* </Box> */}
+                {/* <Box
       sx={{
         width: 500,
         maxWidth: '100%',
@@ -91,7 +120,7 @@ git push origin main
     >
       <TextField fullWidth label="fullWidth" id="fullWidth" />
     </Box> */}
-
+            </form>
         </>
     )
 }

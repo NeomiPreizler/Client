@@ -6,14 +6,20 @@ import "./App.css";
 import useToken from './pages/useToken';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { NavLink } from "react-router-dom";
-import InitialTest from './pages/startToRegister/index'
+import InitialTest from './pages/startToRegister/index';
 import DonaterDetailsForm from "./pages/donater";
+import NeedsDonationDetailsForm from "./pages/needs_donation";
+import SignupForm from "./pages/startToRegister/tryYupGabage"
+
+// import MedicalFormYup from "./pages/startToRegister/tryYup"
 const routes = [
   { path: "/", component: Home },
   { path: "/register", component: Register },
   { path: "/login", component: Login },
-  { path: "StartToRegister/:typeId", component: InitialTest },
-  
+  { path: "StartToRegister/:type", component: InitialTest },
+  { path: "/donater", component: DonaterDetailsForm },
+  { path: "/needs-donation", component: NeedsDonationDetailsForm }
+
 ]
 function App() {
 
@@ -34,11 +40,12 @@ function App() {
   //   return <Login setToken={setToken} />
   // }
   return (<>
-    {/*<SignupForm></SignupForm>
-     /* <MedicalFormYup></MedicalFormYup>
+    {/* <SignupForm></SignupForm> */}
+    { /* <MedicalFormYup></MedicalFormYup>
     <MedicalFormState></MedicalFormState>
    <MedicalFormFormik></MedicalFormFormik> */}
     {/* <InatialTest></InatialTest> */}
+  
     <Router>
       <nav>
         <NavLink to="/">home page  </NavLink><br></br>
@@ -46,17 +53,14 @@ function App() {
         <NavLink to="/login">Login  </NavLink><br></br>
       </nav>
       <Routes>
-
-      {routes.map((route)=><Route key={route.path} path={route.path} element={<route.component/>}/>)}
-
-
-       {/* <Route path="/" element={<Home />}></Route>
+        {routes.map((route) => <Route key={route.path} path={route.path} element={<route.component />} />)}
+        {/* <Route path="/" element={<Home />}></Route>
       <Route path="/login" element={<Login />}> </Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/StartToRegister/:typeId" element={<InitialTest />}></Route>
       <Route path="/donater" element={<DonaterDetailsForm></DonaterDetailsForm>}></Route>  */}
       </Routes>
-    </Router>
+    </Router> 
   </>
   );
 }

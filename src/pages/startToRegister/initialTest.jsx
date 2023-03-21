@@ -1,83 +1,66 @@
-// import { Box, Button } from '@mui/material';
-// import TextField from '@mui/material/TextField';
-// import { useFormik } from "formik";
-// import { func } from 'prop-types';
-// import { Navigate } from 'react-router';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { Button } from '@mui/material';
+import { TextField } from '@mui/material';
 
-// export const InatialTestgfgdf = ({typeUser}) => {
+// export const InatialTest = () => {
+const validationSchema = yup.object({
+    email: yup
+      .string('Enter your email')
+      .email('Enter a valid email')
+      .required('Email is required'),
+    password: yup
+      .string('Enter your password')
+      .min(8, 'Password should be of minimum 8 characters length')
+      .required('Password is required'),
+  });
+  
+  const InitialTest1 = () => {
+    const formik = useFormik({
+      initialValues: {
+        email: 'foobar@example.com',
+        password: 'foobar',
+      },
+      validationSchema: validationSchema,
+      onSubmit: (values) => {
+        alert(JSON.stringify(values, null, 2));
+      },
+    });
+  
+    return (
+      <div>
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+          <Button color="primary" variant="contained" fullWidth type="submit">
+            Submit
+          </Button>
+        </form>
+      </div>
+    );
+  };
+  
+  //ReactDOM.render(<WithMaterialUI />, document.getElementById('root'));
 
-
-//     const { handleSubmit, values, handleBlur, handleChange, getFieldProps } = useFormik({
-//         initialValues: {
-//             birthDate: new Date(),
-//             height: 0,
-//             weight: 0
-//         },
-//         onSubmit: (values) => {
-//             const check = check(values.birthDate, values.height, values.weight);
-//             if (typeof check == "boolean") {
-//                 Navigate("/")
-//             }
-//             else {
-// alert('nothing')
-//             }
-//         },
-
-//     })
-//     function check(birthDate, height, weight) {
-//         const age = calculateAge(birthDate);
-//         const bmi = calculateBMI(height, weight);
-//         if (age < 20) {
-//             return "your younger then age 20";
-//         }
-
-//         if (bmi < 18.5 || bmi > 24.9) {
-//             return "we are sorry your bmi does not stand in the criteria"
-//         }
-//         return true;
-//     }
-//     function calculateAge(birthDate) {
-//         const correntDate = new Date();
-//         const diff = Math.abs(correntDate - birthDate);
-//         const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-//         return age
-//     }
-//     function calculateBMI(weight, height) {
-//        const bmi = (weight / Math.pow((height / 100), 2)).toFixed(1);
-//         return bmi;
-//     }
-
-
-//     return (
-//         <>
-//             <Box
-//                 component="form"
-//                 sx={{
-//                     '& .MuiTextField-root': { m: 1, width: '25ch' },
-//                 }}
-//                 noValidate
-//                 autoComplete="off"
-//             >
-//                 <div>
-
-//                     <TextField type="date" onChange={handleChange} id="margin-none" label="Date Of Birth" variant="outlined" />
-//                     <br></br><br></br>
-//                     <TextField onChange={handleChange} id="margin-none" label="hight" variant="outlined" />
-//                     <br></br><br></br>
-//                     <TextField onChange={handleChange} id="margin-none" label="wight" variant="outlined" />
-
-//                 </div>
-//                 <Button type='submit' variant="text" onClick={() => { func() }}>ok</Button>
-//             </Box>
-//             {/* <Box
-//       sx={{
-//         width: 500,
-//         maxWidth: '100%',
-//       }}
-//     >
-//       <TextField fullWidth label="fullWidth" id="fullWidth" />
-//     </Box> */}
-
-//         </>
-//     )
-// }
+export default InitialTest1;

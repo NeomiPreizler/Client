@@ -38,7 +38,6 @@ const Register = () => {
                  <Link to="/home">
                     <button>continue?</button>
                 </Link>  */}
-                
                 <br></br>
             </div>
     )

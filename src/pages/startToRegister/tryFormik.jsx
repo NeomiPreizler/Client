@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 
-const MedicalFormFormik = () => {
+const MedicalFormFormik12 = () => {
   return (
     <Formik
       initialValues={{
@@ -57,4 +57,4 @@ const MedicalFormFormik = () => {
   );
 };
 
-export default MedicalFormFormik;
+export default MedicalFormFormik12;

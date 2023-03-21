@@ -9,6 +9,7 @@ import { Navigate } from "react-router-dom";
 const Login = () => {
   // const [userName, setUserName] = useState("");
   // const [password, setPassword] = useState("");
+
   // const loginUser = async (userName, password ) => {
   //   const data = await axios.post("http://localhost:3600/api/auth/login", { userName, password });
   //   sessionStorage.setItem("token",data)
@@ -16,21 +17,19 @@ const Login = () => {
   //   console.log(data)
   // };
 
-  const { values, handleSubmit, handleChange, getFieldProps } = useFormik({
+  const { values, handleSubmit, getFieldProps } = useFormik({
     initialValues: {
       userName: "",
-      password: ""
+      password: "",
+      email:""
     },
     onSubmit: async (values) => {
       try {
-        const data = await axios.post("http://localhost:3600/api/auth/login", { userName: values.userName, password: values.password });
-        // useToken.saveToken(data);
-        console.log("before");
-        localStorage.setItem("token", data.accessToken)
-        localStorage.setItem("userName",data.userName);
-         console.log(data.accessToken)
+        const userDitails = await axios.post("http://localhost:3600/api/auth/login", { userName: values.userName, password: values.password,email:values.email });
+        localStorage.setItem("token", userDitails.data.accessToken)
+        //userDitails.data.accessToken
+        localStorage.setItem("userId", userDitails.data.userId)
         Navigate('/profile');
-       
       }
       catch (err) {
         console.log(err);
@@ -41,37 +40,42 @@ const Login = () => {
 
 
     <div className="login">
-      <form>
-        {/* // //   <h1>Login page</h1>
+      <form onSubmit={handleSubmit}>
+        {/* <h1>Login page</h1>
 
-      // //   <input type="text" onChange={(e) => { setUserName(e.target.value) }} value={userName} placeholder="please enter your name"></input>
-      // //   <br></br>
-      // //   <input type="password" onChange={(e) => { setPassword(e.target.value) }}value={password} placeholder="please enter your password"></input>
-      // //   <br></br>
-      // //   <br></br>
-      // //   <button onClick={() => { loginUser() }}></button>
-      // //   <br></br> */}
-
-        <TextField
-          value={values.userName}
-
+      <input type="text" onChange={(e) => { setUserName(e.target.value) }} value={userName} placeholder="please enter your name"></input>
+      <br></br>
+      <input type="password" onChange={(e) => { setPassword(e.target.value) }} value={password} placeholder="please enter your password"></input>
+      <br></br>
+      <br></br>
+      <button onClick={() => { loginUser() }}></button>
+      <br></br> */}
+    <TextField
+          // value={values.userName}
           id="filled-basic"
           label="userName"
           variant="filled"
-          onChange={handleChange}
+          //  onChange={handleChange}
           {...getFieldProps("userName")}
-        />
+        /><br></br>
         <TextField
-          value={values.password}
-
+          // value={values.userName}
+          id="filled-basic"
+          label="email"
+          variant="filled"
+          //  onChange={handleChange}
+          {...getFieldProps("email")}
+        /><br></br>
+        <TextField
+          // value={values.password}
           id="filled-basic"
           label="password"
           variant="filled"
-          onChange={handleChange}
+          // onChange={handleChange}
           {...getFieldProps("password")}
-        />
+        /><br></br>
 
-        <Button type="submit" variant="outlined">login</Button>
+        <Button type="submit" variant="outlined">login</Button><br></br>
         <Link to="/register">if your not signed in enter here</Link>
 
       </form>

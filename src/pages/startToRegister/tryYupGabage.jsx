@@ -75,39 +75,97 @@ const MySelect = ({ label, ...props }) => {
 };
 
 // And now we can use these
-export const SignupForm = () => {
+ const SignupForm = () => {
   return (
     <>
       <h1>Subscribe!</h1>
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
-          email: "",
-          acceptedTerms: false, // added for our checkbox
-          jobType: "" // added for our select
+          id:'',
+          userId:'',
+          first_name: '',
+          last_name: '',
+          // avaliable:'',
+          // has_pair:'',
+          id_pair:'',
+          // medical info table
+          // // idmedical_info_donater:'',
+          hight: '',
+          weight: '',
+          birthDate: '',
+          gender: '',
+          // high_blood_pressure: '',
+          blood_type: '',
+          // diabetes: '',
+          // kidney_diseases: '',
+          // kidney_stones: '',
+          // hospitalized: '',
+          // surgeries_in_the_past: '',
+          // heart_or_lung_dysfunction: '',
+          // medication_regularly: '',
+          // suffer_from_allergies: '',
+          // smoked_in_the_past: '',
+          // smoking: '',
+          // family_with_diabetes: '',
+          // born_before_37th_week: '',
+          // CT_examination:'',
+          // cheast_examination:'' , 
+          // urine_Test:'',
+          // psychological_evaluation:'',
+          ////personal info table
+          idpersonal_info_donater:'',
+          city: '',
+          address: '',
+          country: '',
+          phone_number: '',
+          cell_phone: '',
+          preferred_language: '',
+          acceptedTerms:false,
         }}
         validationSchema={Yup.object({
-          firstName: Yup.string()
+          first_name: Yup.string()
             .max(15, "Must be 15 characters or less")
             .required("Required"),
-          lastName: Yup.string()
+          last_name: Yup.string()
             .max(20, "Must be 20 characters or less")
             .required("Required"),
-          email: Yup.string()
-            .email("Invalid email addresss`")
+          has_pair: Yup.string()
             .required("Required"),
+          hight: Yup.string()
+            .required("Required"),
+          weight: Yup.string()
+            .required("Required"),
+          gender: Yup.string()
+          .oneOf(
+            ["male","female"],
+            "Invalid gender Type"
+          ).required("Required"),
+          blood_type: Yup.string()
+          .oneOf(
+            ["A+","A-","B+","B-","AB+","AB-","O+","O-"],
+            "Invalid blood Type"
+          ).required("Required"),
+          
+          phone_number: Yup.string()
+          .required("Required")
+          .matches(
+            /^(\+\d{1,2}-)?\(?\d{3}\)?[-]\d{7}$/,
+            "Cell phone must have 12 digits at max"
+          ),
+          cell_phone: Yup.string()
+            .required("Required")
+            .matches(
+              /^(\+\d{1,2}-)?\(?\d{3}\)?[-]\d{7}$/,
+              "Cell phone must have 12 digits at max"
+            ),
+          preferred_language: Yup.string()
+          .oneOf(
+            ["English","Hebrew","French","Arabic","Flemish+","Russian","Spanish"],
+            "Invalid languge Type"
+          ).required("Required"),
           acceptedTerms: Yup.boolean()
             .required("Required")
             .oneOf([true], "You must accept the terms and conditions."),
-          jobType: Yup.string()
-            // specify the set of valid values for job type
-            // @see http://bit.ly/yup-mixed-oneOf
-            .oneOf(
-              ["designer", "development", "product", "other"],
-              "Invalid Job Type"
-            )
-            .required("Required")
         })}
         onSubmit={async (values, { setSubmitting }) => {
           await new Promise(r => setTimeout(r, 500));
@@ -115,30 +173,92 @@ export const SignupForm = () => {
         }}
       >
         <Form>
+        <MyTextInput
+            label="ID"
+            name="id"
+            type="text"
+            placeholder="Jane"
+          />
+          <MyTextInput
+            label="userId"
+            name="userId"
+            type="text"
+            placeholder="Jane"
+          />
           <MyTextInput
             label="First Name"
-            name="firstName"
+            name="firs_tName"
             type="text"
             placeholder="Jane"
           />
           <MyTextInput
             label="Last Name"
-            name="lastName"
+            name="last_Name"
             type="text"
             placeholder="Doe"
           />
           <MyTextInput
-            label="Email Address"
-            name="email"
-            type="email"
-            placeholder="jane@formik.com"
+            label="id_pair"
+            name="id_pair"
+            type="text"
+            placeholder="32456745"
           />
-          <MySelect label="Job Type" name="jobType">
-            <option value="">Select a job type</option>
-            <option value="designer">Designer</option>
-            <option value="development">Developer</option>
-            <option value="product">Product Manager</option>
-            <option value="other">Other</option>
+          <MyTextInput
+            label="hight"
+            name="hight"
+            type="text"
+            placeholder="hight"
+          />
+           <MyTextInput
+            label="weight"
+            name="weight"
+            type="text"
+            placeholder="weight"
+          />
+           <MyTextInput
+            label="birthDate"
+            name="birthDate"
+            type="date"
+            placeholder="13/05/06"
+          />
+          <MySelect label="gender" name="gender">
+            <option value="">Select a gender type</option>
+            <option value="designer">male</option>
+            <option value="development">female</option>
+          </MySelect>
+          <MySelect label="blood_type" name="blood_type">
+            <option value="">Select a blood type</option>
+            <option value="designer">A+</option>
+            <option value="development">A-</option>
+            <option value="product">B+</option>
+            <option value="other">B-</option>
+            <option value="other">AB+</option>
+            <option value="other">AB-</option>
+            <option value="other">O+</option>
+            <option value="other">O-</option>
+          </MySelect>
+          <MyTextInput
+            label="phone_number"
+            name="phone_number"
+            type="text"
+            placeholder="5869234"
+          />
+           <MyTextInput
+            label="cell_phone"
+            name="cell_phone"
+            type="text"
+            placeholder="0567342345"
+          />
+          
+          <MySelect label="preferred_language" name="preferred_language">
+            <option value="">Select a preferred_language</option>
+            <option value="designer">English</option>
+            <option value="development">Hebrew</option>
+            <option value="product">Arabic</option>
+            <option value="other">Flemish</option>
+            <option value="other">Russian</option>
+            <option value="other">Spanish</option>
+            
           </MySelect>
           <MyCheckbox name="acceptedTerms">
             I accept the terms and conditions
@@ -157,3 +277,4 @@ export const SignupForm = () => {
 
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<App />, rootElement);
+export default SignupForm;
