@@ -17,17 +17,17 @@ export const InatialTest = () => {
 
     const { type } = useParams();
     console.log({ type });
-    const onSubmit = (values) => {
-        console.log("on submit")
-        const check = true;
-        if (typeof check == "boolean") {
+    const onSubmit = () => {
+        // console.log("on submit",type)
+        // const check = true;
+        // if (typeof check == "boolean") {
             if (type === "donater")
-                navigate("/donater")
-            else navigate("/needs-donation")
-        }
-        else {
-            alert(`${check}`);
-        }
+                navigate(`/donater`)
+            else navigate(`/needs-donation`)
+        // }
+        // else {
+        //     alert(`${check}`);
+        // }
     }
 
     const { handleSubmit, getFieldProps, errors } = useFormik({

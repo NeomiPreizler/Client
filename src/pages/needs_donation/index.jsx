@@ -11,8 +11,8 @@ const NeedsDonationDetailsForm = () => {
     console.log(values, "valuesvalues");
     console.log("post");
     try {
-      await axios.post("http://localhost:3600/api/needDonation", { body: values });
-      navigate('/')
+      await axios.post("http://localhost:3600/api/needDonation", values);
+      navigate('/profile')
 
     } catch (err) {
       setErr(err.response.data?.message);

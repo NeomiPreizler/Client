@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react"
-//import PropTypes from 'prop-types';
 import axios from "axios";
 import { Link } from "react-router-dom"
 import { useFormik } from "formik";
 import { Button, TextField } from '@mui/material';
 import useToken from "../useToken";
-import { Navigate } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
-  // const [userName, setUserName] = useState("");
+  //const [userName, setUserName] = useState("");
   // const [password, setPassword] = useState("");
 
   // const loginUser = async (userName, password ) => {
@@ -16,20 +18,26 @@ const Login = () => {
   //   // useToken.saveToken(data);
   //   console.log(data)
   // };
+    const navigate = useNavigate();
 
+  const {login} = useContext(AuthContext)
   const { values, handleSubmit, getFieldProps } = useFormik({
     initialValues: {
       userName: "",
       password: "",
-      email:""
+      email: ""
     },
     onSubmit: async (values) => {
       try {
-        const userDitails = await axios.post("http://localhost:3600/api/auth/login", { userName: values.userName, password: values.password,email:values.email });
-        localStorage.setItem("token", userDitails.data.accessToken)
-        //userDitails.data.accessToken
-        localStorage.setItem("userId", userDitails.data.userId)
-        Navigate('/profile');
+        console.log(`nnnnnnn${values.userName}`);
+        await login({ userName: values.userName, password: values.password, email: values.email });
+        navigate('/');
+        // const userDitails = await axios.post("http://localhost:3600/api/auth/login", { userName: values.userName, password: values.password, email: values.email });
+        // localStorage.setItem("token", userDitails.data.accessToken)
+        // setCurrentUser(userDitails.data.user);
+        // setToken(userDitails.data.accessToken);
+        // localStorage.setItem("user", userDitails.data.user)
+        
       }
       catch (err) {
         console.log(err);
@@ -37,11 +45,9 @@ const Login = () => {
     }
   })
   return (
-
-
     <div className="login">
       <form onSubmit={handleSubmit}>
-        {/* <h1>Login page</h1>
+      {/* <h1>Login page</h1>
 
       <input type="text" onChange={(e) => { setUserName(e.target.value) }} value={userName} placeholder="please enter your name"></input>
       <br></br>
@@ -50,7 +56,7 @@ const Login = () => {
       <br></br>
       <button onClick={() => { loginUser() }}></button>
       <br></br> */}
-    <TextField
+        <TextField
           // value={values.userName}
           id="filled-basic"
           label="userName"

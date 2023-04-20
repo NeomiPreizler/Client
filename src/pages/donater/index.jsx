@@ -1,35 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
+import { AuthContext } from "../../context/authContext";
+import { useContext } from "react";
 
 const DonaterDetailsForm = () => {
   const [err, setErr] = useState(null);
+  // const [first, setFirst] = useState(true);
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+  // const { firstTimeIn, signedIn } = useContext(AuthContext);
+  // const { donater } = useParams();
 
+  // console.log(donater, "typppppppe");
   const onSubmit = async (values) => {
-    console.log(values, "valuesvalues");
-    console.log("post");
-     values.userId=localStorage.getItem("userId");
-     values.idmedical_info_donater=values.id;
-     values.idpersonal_info_donater=values.id;
-console.log("idddddddd",values.idmedical_info_donater);
-console.log(values);
-console.log("BLOOD TYPE",values.blood_type);
+    // if (firstTimeIn == true) console.log("true sarale true");
+    // if (firstTimeIn == false) console.log("false sarale false");
+    // if (first == true) console.log("true first true");
+    // if (first == false) console.log("false first false");
+    values.userId = currentUser.userId;
+    values.idmedical_info_donater = values.userId;
+    values.idpersonal_info_donater = values.userId;
+    // values.role = donater
     try {
-      await axios.post("http://localhost:3600/api/donaters", values );
-      navigate('/')
+      if (values.id != '') {
+        await axios.put("http://localhost:3600/api/donater", values)
+        // navigate('/')
+      }
+      else {
+        await axios.post("http://localhost:3600/api/donater", values);
+       
+      }
 
     } catch (err) {
       setErr(err.response.data?.message);
     }
+     navigate('/')
   }
-  const { handleSubmit, getFieldProps } = useFormik({
+  const { values, setFieldValue, handleSubmit, getFieldProps } = useFormik({
 
     initialValues: {
-      id: '',
+      role: 'DONATER',
       userId: '',
+      id: '',
       first_name: '',
       last_name: '',
       avaliable: '',
@@ -37,17 +52,17 @@ console.log("BLOOD TYPE",values.blood_type);
       id_pair: '',
       //medical info table
       idmedical_info_donater: '',
-      hight: '',
+      hight: '1.9',
       weight: '',
       birthDate: '',
       gender: 'FEMALE',
       high_blood_pressure: false,
-      blood_type:'O+',
+      blood_type: 'O+',
       diabetes: false,
       kidney_diseases: false,
       kidney_stones: false,
       hospitalized: false,
-      surgeries_in_the_past:false,
+      surgeries_in_the_past: false,
       heart_or_lung_dysfunction: false,
       medication_regularly: false,
       suffer_from_allergies: false,
@@ -67,40 +82,77 @@ console.log("BLOOD TYPE",values.blood_type);
       phone_number: 123,
       cell_phone: 2345,
       preferred_language: '',
-
-
     },
     onSubmit
   })
- 
-  
+
+
+  const loadDataUser = async () => {
+    console.log("currentUser.userId", currentUser.userId);
+    console.log(currentUser != null);
+
+    if (currentUser != null) {
+      console.log("currentUser.userIdaaa", currentUser.userId);
+      try {
+        const userDetails = await axios.get("http://localhost:3600/api/donater/" + currentUser.userId)
+        // setFieldValue(userDetails.data.id, userDetails.data.userId) 
+        // if (userDetails.data.donaterMedical.idmedical_info_donater != null) { signedIn(); setFirst(false); }
+
+        values.id = userDetails.data.id;
+        values.first_name = userDetails.data.first_name;
+        values.last_name = userDetails.data.last_name;
+        values.avaliable = userDetails.data.avaliable;
+        values.id_pair = userDetails.data.id_pair;
+        //medical
+        //values.hight=userDetails.donaterMedical.hight;
+        //values.weight=userDetails.donaterMedical.weight;
+        //values.medication_regularly=userDetails.donaterMedical.medication_regularly;
+        //values.smoking=userDetails.donaterMedical.smoking;
+        //personal
+        values.city = userDetails.data.donaterPersonal.city;
+        values.address = userDetails.data.donaterPersonal.address;
+        values.country = userDetails.data.donaterPersonal.country;
+        values.phone_number = userDetails.data.donaterPersonal.phone_number;
+        values.cell_phone = userDetails.data.donaterPersonal.cell_phone;
+        values.preferred_language = userDetails.data.donaterPersonal.preferred_language;
+        console.log("work ok", userDetails);
+      }
+      catch (err) { setErr(err.response.data?.message) }
+
+
+
+
+
+      console.log("check name", values.first_name);
+
+    }
+
+  }
+  useEffect(() => {
+    console.log("use effect");
+    loadDataUser();
+  }, [])
+
   return (
+
+
     <Formik onSubmit={handleSubmit}>
       <Form>
+        <br></br> <br></br> <br></br>
         <label htmlFor="id">id</label>
-        <Field type="text" name="id" {...getFieldProps("id")} />
-        <br></br>
-        <label htmlFor="userName">userId</label>
-        <Field type="text" name="userId" {...getFieldProps("userName")} />
+        <Field type="text" name="id" value="id" placeholder={values.id} {...getFieldProps("id")} />
         <br></br>
         <label htmlFor="firstName">FirstName</label>
-        <Field type="text" name="first_name" {...getFieldProps("firstName")} />
+        <Field type="text" name="first_name" value="first_name" placeholder={values.first_name} {...getFieldProps("first_name")} />
         <br></br>
         <label htmlFor="lastName">LastName</label>
-        <Field type="text" name="last_name" {...getFieldProps("lastName")} />
-        <br></br>
-        <label htmlFor="lastName">avaliable</label>
-        <Field type="text" name="avaliable" {...getFieldProps("lastName")} />
-        <br></br>
-        <label htmlFor="lastName">has_pair</label>
-        <Field type="text" name="has_pair" {...getFieldProps("lastName")} />
+        <Field type="text" name="last_name" {...getFieldProps("last_name")} />
         <br></br>
         <label htmlFor="id_pair">id_pair</label>
         <Field type="text" name="id_pair" {...getFieldProps("id_pair")} />
         <br></br>
-
         <label htmlFor="city">city</label>
-        <Field type="text" name="city" {...getFieldProps("city")} />
+        <Field type="text" name="city" placeholder={values.city}{...getFieldProps("city")} />
 
         {/* <Field as="select" name="city">
                 <option value=""></option>
@@ -114,9 +166,7 @@ console.log("BLOOD TYPE",values.blood_type);
         <Field type="text" name="street" {...getFieldProps("street")} />
         <br></br>
 
-        <label htmlFor="num_street">num_street</label>
-        <Field type="text" name="num_street"  {...getFieldProps("num_street")} />
-        <br></br>
+
 
         <label htmlFor="country">country</label>
         <Field type="text" name="country"  {...getFieldProps("country")} />
