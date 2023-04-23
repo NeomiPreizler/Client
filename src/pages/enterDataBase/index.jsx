@@ -4,9 +4,10 @@ import { Button } from '@mui/material';
 export const EnterDataBase=()=>{
 return(
     <>
-    <Button onClick={()=>{}}>Donaters</Button>
-    <Button onClick={()=>{}}>needsDonation</Button>
-    <Button onClick={()=>{}}>users</Button>
+    <br></br>
+    <Button href="/DBdonaters"onClick={()=>{}}>Donaters</Button>
+    <Button href="/DBneedsDonation" onClick={()=>{}}>needsDonation</Button>
+    <Button href="/DBusers" onClick={()=>{}}>users</Button>
     </>
 )
 }

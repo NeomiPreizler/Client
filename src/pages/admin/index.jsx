@@ -5,16 +5,17 @@ import { useNavigate, useParams } from "react-router-dom";
 
 
 export const AdminScreen=()=>{
-previousCrosses=async()=>{
 
-}
 
 const navigate = useNavigate();
 return(
     
     <>
-    <Button onClick={()=>{previousCrosses()}}>previous  crosses </Button>
+    <br></br>
+    <Button variant="contained" href="/previousCrosses">previous  crosses </Button>
+    <br></br><br></br>
     <Button variant="contained" href="/adjusmentFunction">Adjustment Function</Button>
+    <br></br><br></br>
     <Button variant="contained" href="/enterDataBase">for entering to database</Button>
     </>
 )

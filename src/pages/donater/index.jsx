@@ -13,7 +13,6 @@ const DonaterDetailsForm = () => {
   const { currentUser } = useContext(AuthContext);
   // const { firstTimeIn, signedIn } = useContext(AuthContext);
   // const { donater } = useParams();
-
   // console.log(donater, "typppppppe");
   const onSubmit = async (values) => {
     // if (firstTimeIn == true) console.log("true sarale true");
@@ -23,7 +22,7 @@ const DonaterDetailsForm = () => {
     values.userId = currentUser.userId;
     values.idmedical_info_donater = values.userId;
     values.idpersonal_info_donater = values.userId;
-    // values.role = donater
+    // v.role = donater
     try {
       if (values.id != '') {
         await axios.put("http://localhost:3600/api/donater", values)
@@ -39,8 +38,8 @@ const DonaterDetailsForm = () => {
     }
      navigate('/')
   }
-  const { values, setFieldValue, handleSubmit, getFieldProps } = useFormik({
-
+  const {values, setFieldValue, handleSubmit, getFieldProps } = useFormik({
+    enableReinitialize:true,
     initialValues: {
       role: 'DONATER',
       userId: '',
@@ -79,8 +78,8 @@ const DonaterDetailsForm = () => {
       city: '',
       address: '',
       country: '',
-      phone_number: 123,
-      cell_phone: 2345,
+      phone_number: '',
+      cell_phone: '',
       preferred_language: '',
     },
     onSubmit
@@ -93,7 +92,7 @@ const DonaterDetailsForm = () => {
 
     if (currentUser != null) {
       console.log("currentUser.userIdaaa", currentUser.userId);
-      try {
+      // try {
         const userDetails = await axios.get("http://localhost:3600/api/donater/" + currentUser.userId)
         // setFieldValue(userDetails.data.id, userDetails.data.userId) 
         // if (userDetails.data.donaterMedical.idmedical_info_donater != null) { signedIn(); setFirst(false); }
@@ -116,22 +115,15 @@ const DonaterDetailsForm = () => {
         values.cell_phone = userDetails.data.donaterPersonal.cell_phone;
         values.preferred_language = userDetails.data.donaterPersonal.preferred_language;
         console.log("work ok", userDetails);
-      }
-      catch (err) { setErr(err.response.data?.message) }
-
-
-
-
-
+      // }
+      // catch (err) { setErr(err.response.data?.message) }
       console.log("check name", values.first_name);
-
     }
-
   }
   useEffect(() => {
     console.log("use effect");
     loadDataUser();
-  }, [])
+  }, [values])
 
   return (
 
@@ -140,19 +132,19 @@ const DonaterDetailsForm = () => {
       <Form>
         <br></br> <br></br> <br></br>
         <label htmlFor="id">id</label>
-        <Field type="text" name="id" value="id" placeholder={values.id} {...getFieldProps("id")} />
+        <Field type="text" name="id" value={values.id} {...getFieldProps("id")}/>
         <br></br>
         <label htmlFor="firstName">FirstName</label>
-        <Field type="text" name="first_name" value="first_name" placeholder={values.first_name} {...getFieldProps("first_name")} />
+        <Field type="text" name="first_name" value={values.first_name} {...getFieldProps("first_name")} />
         <br></br>
         <label htmlFor="lastName">LastName</label>
-        <Field type="text" name="last_name" {...getFieldProps("last_name")} />
+        <Field type="text" name="last_name" value={values.last_name}{...getFieldProps("last_name")} />
         <br></br>
         <label htmlFor="id_pair">id_pair</label>
-        <Field type="text" name="id_pair" {...getFieldProps("id_pair")} />
+        <Field type="text" name="id_pair" value={values.id_pair}{...getFieldProps("id_pair")} />
         <br></br>
         <label htmlFor="city">city</label>
-        <Field type="text" name="city" placeholder={values.city}{...getFieldProps("city")} />
+        <Field type="text" name="city" value={values.city}{...getFieldProps("city")} />
 
         {/* <Field as="select" name="city">
                 <option value=""></option>
@@ -163,27 +155,24 @@ const DonaterDetailsForm = () => {
         <br></br>
 
         <label htmlFor="street">street</label>
-        <Field type="text" name="street" {...getFieldProps("street")} />
+        <Field type="text" name="street" value={values.street}{...getFieldProps("street")} />
         <br></br>
-
-
-
         <label htmlFor="country">country</label>
-        <Field type="text" name="country"  {...getFieldProps("country")} />
+        <Field type="text" name="country" value={values.country} {...getFieldProps("country")} />
         <br></br>
-        {/* <label htmlFor="phone_number">phone_number</label>
-        <Field type="text" name="phone_number"  {...getFieldProps("phone_number")} />
+         <label htmlFor="phone_number">phone_number</label>
+        <Field type="text" name="phone_number" value={values.phone_number} {...getFieldProps("phone_number")} />
         <br></br>
         <label htmlFor="cell_phone">cell_phone</label>
-        <Field type="text" name="cell_phone" {...getFieldProps("cell_phone")} /> */}
+        <Field type="text" name="cell_phone" value={values.cell_phone}{...getFieldProps("cell_phone")} /> 
         <br></br>
         <label htmlFor="preferred_language">preferred_language</label>
-        <Field as="select" name="preferred_language"  {...getFieldProps("preferred_language")} >
+        <Field as="select" name="preferred_language"  value={values.preferred_language}{...getFieldProps("preferred_language")} >
           <option value=""></option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </Field>
-        <br></br>
+        <br></br><br></br>
         <button type="submit" >
           Submit
         </button>

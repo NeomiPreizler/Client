@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { AuthContext } from '../../context/authContext';
+import {useContext} from "react";
+
 const NeedsDonationDetailsForm = () => {
   const [err, setErr] = useState(null);
   const navigate = useNavigate();
+  const {currentUser}=useContext(AuthContext);
 
   const onSubmit = async (values) => {
-    console.log(values, "valuesvalues");
-    console.log("post");
+    values.userId = currentUser.userId;
+    values.idmedical_info_needsdonations = values.userId;
+    values.idpersonal_info_needsdonations= values.userId;
+
     try {
-      await axios.post("http://localhost:3600/api/needDonation", values);
-      navigate('/profile')
+      if(values.id!=''){
+        await axios.put("http://localhost:3600/api/needDonation", values);
+      // navigate('/profile')
+      }
+      else{
+        await axios.post("http://localhost:3600/api/needDonation", values);
+      }
+      
 
     } catch (err) {
       setErr(err.response.data?.message);
     }
   }
   const { handleSubmit, getFieldProps } = useFormik({
+    
 
     initialValues: {
-      id: '',
+      role:'',
       userId: '',
+      id: '',
+      email:currentUser.email,
       first_name: '',
       last_name: '',
       has_pair: '',
