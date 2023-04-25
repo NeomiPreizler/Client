@@ -1,10 +1,12 @@
 import { TextField, Box, Button } from '@mui/material';
 import { useFormik } from "formik";
 import { func } from 'prop-types';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import * as yup from 'yup';
+import { AuthContext } from "../../context/authContext";
+
 
 
 const validationSchema = yup.object({
@@ -12,18 +14,25 @@ const validationSchema = yup.object({
         .number('Enter valid number')
         .required('Height is required'),
 });
-export const InatialTest = () => {
+const InatialTest = () => {
     const navigate = useNavigate()
 
     const { type } = useParams();
-    console.log({ type });
+     const { currentUser } = useContext(AuthContext)
+    // console.log({ type });
     const onSubmit = () => {
-        // console.log("on submit",type)
+        console.log("on submit",type)
         // const check = true;
         // if (typeof check == "boolean") {
-            if (type === "donater")
-                navigate(`/donater`)
-            else navigate(`/needs-donation`)
+        if (type === "donater"){
+           console.log("donater in qustion");
+            navigate(`/donater`)
+        }
+            
+        if(type === "needsDonation"){
+           console.log("needsDonation in qustion");
+           navigate(`/needsDonation`);}
+        //else navigate(`/needsDonation`)
         // }
         // else {
         //     alert(`${check}`);
@@ -33,7 +42,7 @@ export const InatialTest = () => {
     const { handleSubmit, getFieldProps, errors } = useFormik({
         initialValues: {
             birthDate: new Date(),
-            height: undefined,
+            height: 7,
             weight: 0
         },
         validationSchema,
@@ -43,28 +52,34 @@ export const InatialTest = () => {
     //     event.preventDefault();
     // };
 
-    const checkDitials = (birthDate, height, weight) => {
-        const age = calculateAge(birthDate);
-        const bmi = calculateBMI(height, weight);
-        if (age < 20) {
-            return "your younger then age 20";
-        }
+    // const checkDitials = (birthDate, height, weight) => {
+    //     const age = calculateAge(birthDate);
+    //     const bmi = calculateBMI(height, weight);
+    //     if (age < 20) {
+    //         return "your younger then age 20";
+    //     }
 
-        if (bmi < 18.5 || bmi > 24.9) {
-            return "we are sorry your bmi does not stand in the criteria"
-        }
-        return true;
-    }
-    function calculateAge(birthDate) {
-        const correntDate = new Date();
-        const diff = Math.abs(correntDate - birthDate);
-        const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-        return age
-    }
-    function calculateBMI(weight, height) {
-        const bmi = (weight / Math.pow((height / 100), 2)).toFixed(1);
-        return bmi;
-    }
+    //     if (bmi < 18.5 || bmi > 24.9) {
+    //         return "we are sorry your bmi does not stand in the criteria"
+    //     }
+    //     return true;
+    // }
+    // function calculateAge(birthDate) {
+    //     const correntDate = new Date();
+    //     const diff = Math.abs(correntDate - birthDate);
+    //     const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+    //     return age
+    // }
+    // function calculateBMI(weight, height) {
+    //     const bmi = (weight / Math.pow((height / 100), 2)).toFixed(1);
+    //     return bmi;
+    // }
+
+    useEffect(() => {
+        // if(currentUser!=null)
+        // alert("You are not registered, you must register")
+})
+
 
 
     return (

@@ -32,13 +32,14 @@ const routes = [
   // { path: "/donater/:donater", component: DonaterDetailsForm },
   // { path: "/needs-donation/:needs-donation", component: NeedsDonationDetailsForm },
   { path: "/donater", component: DonaterDetailsForm },
-  { path: "/needs-donation", component: NeedsDonationDetailsForm },
+  { path: "/needsDonation", component: NeedsDonationDetailsForm },
   { path: "/enterDataBase", component: EnterDataBase },
   { path: "/enterDataBase", component: AdjusmentFunction },
   { path: "/enterDataBase", component: PreviousCrosses },
   { path: "/admin", component: AdminScreen },
   { path: "/DBdonaters", component: DBdonaters },
   { path: "/DBneedsDonation", component: DBneedsDonation },
+  { path: "/test", component: <h1> Test</h1> },
   // { path: "/DBusers", component: DBusers }
 ]
 
