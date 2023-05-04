@@ -39,7 +39,7 @@ const InatialTest = () => {
         // }
     }
 
-    const { handleSubmit, getFieldProps, errors } = useFormik({
+    const {  handleSubmit,getFieldProps, errors } = useFormik({
         initialValues: {
             birthDate: new Date(),
             height: 7,
@@ -52,33 +52,33 @@ const InatialTest = () => {
     //     event.preventDefault();
     // };
 
-    // const checkDitials = (birthDate, height, weight) => {
-    //     const age = calculateAge(birthDate);
-    //     const bmi = calculateBMI(height, weight);
-    //     if (age < 20) {
-    //         return "your younger then age 20";
-    //     }
+    const checkDitials = (birthDate, height, weight) => {
+        const age = calculateAge(birthDate);
+        const bmi = calculateBMI(height, weight);
+        if (age < 20) {
+            return "your younger then age 20";
+        }
 
-    //     if (bmi < 18.5 || bmi > 24.9) {
-    //         return "we are sorry your bmi does not stand in the criteria"
-    //     }
-    //     return true;
-    // }
-    // function calculateAge(birthDate) {
-    //     const correntDate = new Date();
-    //     const diff = Math.abs(correntDate - birthDate);
-    //     const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-    //     return age
-    // }
-    // function calculateBMI(weight, height) {
-    //     const bmi = (weight / Math.pow((height / 100), 2)).toFixed(1);
-    //     return bmi;
-    // }
+        if (bmi < 18.5 || bmi > 24.9) {
+            return "we are sorry your bmi does not stand in the criteria"
+        }
+        return true;
+    }
+    function calculateAge(birthDate) {
+        const correntDate = new Date();
+        const diff = Math.abs(correntDate - birthDate);
+        const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+        return age
+    }
+    function calculateBMI(weight, height) {
+        const bmi = (weight / Math.pow((height / 100), 2)).toFixed(1);
+        return bmi;
+    }
 
-    useEffect(() => {
-        // if(currentUser!=null)
-        // alert("You are not registered, you must register")
-})
+//     useEffect(() => {
+//         // if(currentUser!=null)
+//         // alert("You are not registered, you must register")
+// })
 
 
 

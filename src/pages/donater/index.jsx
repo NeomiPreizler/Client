@@ -8,75 +8,81 @@ import { useContext } from "react";
 
 const DonaterDetailsForm = () => {
   const [err, setErr] = useState(null);
-  const [values, setValues] = useState()
+  const [dbValues, setDbValues] = useState({})
   // const [first, setFirst] = useState(true);
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
  
   
-  const onSubmit = async (values) => {
-
+const onSubmit = async (values) => {
+  console.log("values", values)
+console.log("ON SUBMIT")
     const userId = currentUser.userId;
+    console.log("currentUser.userId",currentUser.userId)
     const role = 'DONATER';
-    const idmedical_info_donater = values.userId;
-    const idpersonal_info_donater = values.userId;
+    const idmedical_info_donater = userId;
+    const idpersonal_info_donater = userId;
+    console.log(currentUser.role,"currentUser.role");
     try {
-      if (values.id != '') {
-        await axios.put("http://localhost:3600/api/donater", {values, userId, role, idmedical_info_donater, idpersonal_info_donater})
+      if (currentUser.role != null) {
+        await axios.put("http://localhost:3600/api/donater",values)
+       // await axios.put("http://localhost:3600/api/donater",{values, userId})
+        // , idmedical_info_donater, idpersonal_info_donater})
         console.log("returned");
-        navigate('/')
+        //navigate('/')
       }
-      else {
-        await axios.post("http://localhost:3600/api/donater", values);
-
+      else { 
+        console.log(values, userId, role);   
+         //needs to update the current user role 
+        await axios.post("http://localhost:3600/api/donater",{ values, userId, role, idmedical_info_donater, idpersonal_info_donater});
       }
 
     } catch (err) {
       setErr(err.response.data?.message);
     }
-    navigate('/')
+    //navigate('/')
   }
   const { handleSubmit, getFieldProps } = useFormik({
     enableReinitialize: true,
     initialValues: {
-      id: values?.id || '',
-      first_name: values?.first_name || '',
-      last_name: values?.last_name || '',
+      id: dbValues?.id || '',
+      first_name: dbValues?.first_name || '',
+      last_name: dbValues?.last_name || '',
       // avaliable: '',
       // has_pair: '',
-      id_pair: values?.id_pair || '',
+      id_pair: dbValues?.id_pair || '',
       //medical info table
-      // idmedical_info_donater: values?.last_name|| '',
-      height: values?.detailsMedical.height || '',
-      weight: values?.weight || '',
-      birthDate: values?.birthDate || '',
-      gender: values?.gender || '',
-      high_blood_pressure: values?.high_blood_pressure || false,
-      blood_type: values?.blood_type || '',
-      diabetes: values?.diabetes || false,
-      kidney_diseases: values?.kidney_diseases || false,
-      kidney_stones: values?.kidney_stones || false,
-      hospitalized: values?.hospitalized || false,
-      surgeries_in_the_past: values?.surgeries_in_the_past || false,
-      heart_or_lung_dysfunction: values?.heart_or_lung_dysfunction || false,
-      medication_regularly: values?.medication_regularly || false,
-      suffer_from_allergies: values?.suffer_from_allergies || false,
-      smoked_in_the_past: values?.smoked_in_the_past || false,
-      smoking: values?.smoking || false,
-      family_with_diabetes: values?.family_with_diabetes || false,
-      born_before_37th_week: values?.born_before_37th_week || false,
-      CT_examination: values?.CT_examination || false,
-      cheast_examination: values?.cheast_examination || false,
-      urine_Test: values?.urine_Test || false,
-      psychological_evaluation: values?.psychological_evaluation || false,
+      // idmedical_info_donater: dbValues?.last_name|| '',
+      //height: dbValues?.detailsMedical.height || '',
+      weight: dbValues?.weight || '',
+      birthDate: dbValues?.birthDate || '',
+      gender: dbValues?.gender || '',
+      high_blood_pressure: dbValues?.high_blood_pressure || false,
+      blood_type: dbValues?.blood_type || '',
+      diabetes: dbValues?.diabetes || false,
+      kidney_diseases: dbValues?.kidney_diseases || false,
+      kidney_stones: dbValues?.kidney_stones || false,
+      hospitalized: dbValues?.hospitalized || false,
+      surgeries_in_the_past: dbValues?.surgeries_in_the_past || false,
+      heart_or_lung_dysfunction: dbValues?.heart_or_lung_dysfunction || false,
+      medication_regularly: dbValues?.medication_regularly || false,
+      suffer_from_allergies: dbValues?.suffer_from_allergies || false,
+      smoked_in_the_past: dbValues?.smoked_in_the_past || false,
+      smoking: dbValues?.smoking || false,
+      family_with_diabetes: dbValues?.family_with_diabetes || false,
+      born_before_37th_week: dbValues?.born_before_37th_week || false,
+      CT_examination: dbValues?.CT_examination || false,
+      cheast_examination: dbValues?.cheast_examination || false,
+      urine_Test: dbValues?.urine_Test || false,
+      psychological_evaluation: dbValues?.psychological_evaluation || false,
       //personal info table
-      // idpersonal_info_donater:  values?.idpersonal_info_donater|| '',
-      city: values?.city || '',
-      address: values?.address || '',
-      country: values?.country || '',
-      phone_number: values?.phone_number || '',
-      cell_phone: values?.cell_phone || '',
-      preferred_language: values?.preferred_language || '',
+      // idpersonal_info_donater:  dbValues?.idpersonal_info_donater|| '',
+      city: dbValues?.city || '',
+      address: dbValues?.address || '',
+      country: dbValues?.country || '',
+      phone_number: dbValues?.phone_number || '',
+      cell_phone: dbValues?.cell_phone || '',
+      preferred_language: dbValues?.preferred_language || '',
     },
     onSubmit
   })
@@ -86,13 +92,13 @@ const DonaterDetailsForm = () => {
     console.log("currentUser.userId", currentUser.userId);
     console.log(currentUser != null);
 
-    if (currentUser != null) {
+    if (currentUser.role != null) {
       console.log("currentUser.userIdaaa", currentUser.userId);
       try {
         const userDetails = await axios.get("http://localhost:3600/api/donater/" + currentUser.userId)
 
         // setFieldValue("id", userDetails.data.id);
-        setValues(userDetails.data)
+        setDbValues(userDetails.data)
         // setValues(userDetails.data.donaterMedical)
         // setValues(userDetails.data.donaterPersonal)
 
@@ -101,7 +107,8 @@ const DonaterDetailsForm = () => {
 
         console.log("work ok", userDetails);
       }
-      catch (err) { setErr(err.response.data?.message) }
+      catch (err) {console.log("error"); }
+       //  setErr(err.response.data?.message) }
       // console.log("check name", values.first_name);
     }
   }

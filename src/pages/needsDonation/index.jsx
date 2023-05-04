@@ -7,9 +7,8 @@ import { AuthContext } from '../../context/authContext';
 import {useContext} from "react";
 
 const NeedsDonationDetailsForm = () => {
-  const [err, setErr] = useState(null);
+
   const [values,setValues]=useState();
-  const [firstIn,setFirstIn]=useState(true);
   const navigate = useNavigate();
   const {currentUser}=useContext(AuthContext);
 
@@ -17,21 +16,21 @@ const NeedsDonationDetailsForm = () => {
     console.log("i'm in onSubmit function", values.id);
     const userId = currentUser.userId;
     const role='NEEDSDONATION';
-    const idmedical_info_needsdonations = values.userId;
-    const idpersonal_info_needsdonations= values.userId;
-    // console.log("whats with firstTimeIn?",firstIn);
+    // const idmedical_info_needsdonations = userId;
+    // const idpersonal_info_needsdonations= userId;
+   
     try {
-      if(firstIn==false){
-        await axios.put("http://localhost:3600/api/needDonation", {values,userId,role,idmedical_info_needsdonations,idpersonal_info_needsdonations});
-      // navigate('/profile')
+      if(currentUser.role!=null){
+        await axios.put("http://localhost:3600/api/needDonation", {values,userId});
+    
       }
       else{
-        await axios.post("http://localhost:3600/api/needDonation",{ values,userId,role,idmedical_info_needsdonations,idpersonal_info_needsdonations});
+        await axios.post("http://localhost:3600/api/needDonation",{ values,userId,role});
       }
-      
 
     } catch (err) {
-      setErr(err.response.data?.message);
+      console.log(err);
+   
     }
     navigate('/')
   }
@@ -70,19 +69,19 @@ const NeedsDonationDetailsForm = () => {
     onSubmit,
   })
   const loadDataUser= async()=>{
-    if (values.id!=''){
+    if (currentUser.role!=null){
       console.log("in load something");
+      console.log(currentUser.userId);
       try{
     const userDetails = await axios.get(`http://localhost:3600/api/needDonation/${currentUser.userId}`);
     setValues(userDetails.data)
    }
    catch(err){
-    setErr(err.response.data?.message)
+    console.log(err);
+    //setErr(err.response.data?.message)
    }
     }
-    else{
-      // setFirstIn(false);
-    }
+  
    
   }
 
@@ -96,7 +95,7 @@ const NeedsDonationDetailsForm = () => {
     <Formik onSubmit={handleSubmit}>
       <Form>
         <label htmlFor="id">id</label>
-        <Field type="text" name="id" {...getFieldProps("id")} />
+        <Field type="text" name="id" value={values?.id} {...getFieldProps("id")} />
         <br></br>
         <label htmlFor="firstName">FirstName</label>
         <Field type="text" name="first_name" {...getFieldProps("first_name")} />

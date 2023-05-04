@@ -1,144 +1,123 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
+import * as React from "react";
+import Table from "@mui/material/Table";
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom'
+
 import axios from "axios";
 
+
+
 export const DBdonaters = () => {
-    const [data, setData] = useState();
+  const [data, setData] = useState();
 
-    const loadData = async () => {
-        console.log("DBdonaters");
-        const db = await axios.get("http://localhost:3600/api/donater")
-        console.log(db, "dbdbdbdb");
-        setData(db.data);
-        console.log(data,"db");
-    }
+  const loadData = async () => {
+    console.log("DBdonaters");
+    const db = await axios.get("http://localhost:3600/api/donater")
+    console.log(db, "dbdbdbdb");
+    setData(db.data);
+    console.log(data, "db");
+  }
+  // function createData(userId,id,email,first_name,last_name,avaliable,has_pair,id_pair){
+  //   return{userId,id,email,first_name,last_name,avaliable,has_pair,id_pair};
+  // }
 
 
-    useEffect(() => {
-        loadData();
-    }, []);
-    const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-  {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'density',
-    label: 'Density',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
-];
+  useEffect(() => {
+    loadData();
+  }, []);
+  const navigate = useNavigate()
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
+  return (
 
-// const rows = [
-//   createData('India', 'IN', 1324171354, 3287263),
-//   createData('China', 'CN', 1403500365, 9596961),
-//   createData('Italy', 'IT', 60483973, 301340),
-//   createData('United States', 'US', 327167434, 9833520),
-//   createData('Canada', 'CA', 37602103, 9984670),
-//   createData('Australia', 'AU', 25475400, 7692024),
-//   createData('Germany', 'DE', 83019200, 357578),
-//   createData('Ireland', 'IE', 4857000, 70273),
-//   createData('Mexico', 'MX', 126577691, 1972550),
-//   createData('Japan', 'JP', 126317000, 377973),
-//   createData('France', 'FR', 67022000, 640679),
-//   createData('United Kingdom', 'GB', 67545757, 242495),
-//   createData('Russia', 'RU', 146793744, 17098246),
-//   createData('Nigeria', 'NG', 200962417, 923768),
-//   createData('Brazil', 'BR', 210147125, 8515767),
-// ];
-//data.map((c)=>{createData(c)})
-const rows=[data.map((c)=>{createData(c)})]
+    <TableContainer>
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+      <Table>
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+        <TableHead>
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
- return (
-<>
-     
-    <br></br><br></br>
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper></>
-  );
-  
+          <TableRow>
+
+            <TableCell>userId</TableCell>
+
+            <TableCell>id</TableCell>
+
+            <TableCell>email</TableCell>
+
+            <TableCell>first_name</TableCell>
+
+            <TableCell>last_name</TableCell>
+
+            <TableCell>avaliable</TableCell>
+
+            <TableCell>has_pair</TableCell>
+
+            <TableCell>id_pair</TableCell>
+
+
+
+            {/* <TableCell>Status</TableCell> */}
+
+          </TableRow>
+
+        </TableHead>
+
+        <TableBody>
+
+          {data?.map(data => {
+
+            const { userId, id, email, first_name, last_name, avaliable, has_pair, id_pair } = data
+
+
+            return (
+
+              <TableRow
+
+                key={id}
+
+                sx={{ cursor: 'pointer' }}
+
+              // onClick={() =>
+
+              //     navigate(`/facility/${facility.id}/requests/${id}`)
+
+              // }
+
+              >
+
+                <TableCell align="left">{userId}</TableCell>
+
+                <TableCell align="left">{id}</TableCell>
+
+                <TableCell align="left">{email}</TableCell>
+
+                <TableCell align="left">{first_name}</TableCell>
+
+                <TableCell align="left">{last_name}</TableCell>
+
+                <TableCell align="left">{avaliable}</TableCell>
+
+                <TableCell align="left">{has_pair}</TableCell>
+
+                <TableCell align="left">{id_pair}</TableCell>
+
+
+              </TableRow>
+
+            )
+
+          })}
+
+        </TableBody>
+
+      </Table>
+
+    </TableContainer>
+
+  )
+
 }

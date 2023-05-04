@@ -22,9 +22,9 @@ export const AuthContextProvider = ({ children }) => {
     const res = await axios.post(
       "http://localhost:3600/api/auth/login",
       { userName, email, password },
-      {
-        withCredentials: true,
-      }
+      // {
+      //   withCredentials: true,
+      // }
     );
     setCurrentUser(res.data.user);
     setToken(res.data.accessToken);
