@@ -47,7 +47,7 @@ const NeedsDonationDetailsForm = () => {
       height: values?.height || 7,
       weight: values?.weight || 7,
       birthDate: values?.birthDate || '',
-      blood_type: values?.blood_type || 'O-',
+      blood_type: values?.blood_type || 'O+',
       gender: values?.gender || 'FEMALE',
       cause_of_kidney_failure: values?.cause_of_kidney_failure || '',
       dialysis_type: values?.dialysis_type || 'HEMODIALYSIS',

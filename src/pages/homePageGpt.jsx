@@ -11,8 +11,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+//import { MaterialIcons } from '@expo/vector-icons';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export function HomePage() {
+ function HomePage() {
   const classes = useStyles();
 
   return (
@@ -98,7 +98,7 @@ export function HomePage() {
                   </CardContent>
                   <CardActions className={classes.cardActions}>
                     <IconButton className={classes.favoriteButton}>
-                      <FavoriteIcon />
+                      {/* <FavoriteIcon /> */}
                     </IconButton>
                     <Button size="small" color="primary">
                       View Details
@@ -114,4 +114,4 @@ export function HomePage() {
   );
 }
 
-// export default HomePage;
+export default HomePage;

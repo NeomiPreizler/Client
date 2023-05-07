@@ -1,4 +1,4 @@
-//import "./index.css";
+import "./index.css";
 import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 // import {  useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const Home = () => {
           {currentUser && <>{currentUser.role === "ADMIN" ?
                <Button variant="contained" href="/admin">enter management screen</Button> : <></>}
                {currentUser.role == null ? <>
-                    <Button variant="contained" style={{ background: "#7bb28c" }} onClick={() => navigate(`/donater`)}>donater</Button><br></br><br></br>
+                    <Button variant="contained" style={{ background: "#7bb28c" }} onClick={() => navigate(`StartToRegister/${'donater'}`)}>donater</Button><br></br><br></br>
                     <Button variant="contained"  style={{ background: "#7bb28c" }} onClick={() => navigate(`StartToRegister/${'needsDonation'}`)}>needsDonation</Button></> : <></>
 
                }
@@ -32,7 +32,7 @@ const Home = () => {
           </>}
 
           {currentUser == null ? <>
-               <Button variant="contained" style={{ background: "#7bb28c" }} onClick={() => navigate(`/donater`)}>donater</Button><br></br><br></br>
+               <Button variant="contained" style={{ background: "#7bb28c" }} onClick={() => navigate(`StartToRegister/${'donater'}`)}>donater</Button><br></br><br></br>
                <Button variant="contained" style={{ background: "#7bb28c" }} onClick={() => navigate(`StartToRegister/${'needsDonation'}`)}>needsDonation</Button></> : <></>
           }
 

@@ -17,14 +17,9 @@ import { AdminScreen } from "./pages/admin";
 import { PreviousCrosses } from "./pages/previousCrosses";
 import { DBdonaters } from "./pages/DBdonaters";
 import DBneedsDonation from "./pages/DBneedsDonation";
-import DonaterForm from "./pages/donaterWizard/donaterForm"
 import { DBusers } from "./pages/DBusers";
-//  import HomePage from "./pages/newHomePage";
-import  HomePage  from "./pages/homepagewithoutmui";
-// import  HomePage  from "./pages/homePageGpt";
-// import  HomePage  from "./pages/homePage3";
-
-
+import { HomeMiniRounded } from "@mui/icons-material";
+//import { HomePage } from "./pages/homePageGpt";
 // import { useNavigate } from "react-router-dom";
 // import { FileDownload } from "@mui/icons-material";
 // import MedicalFormYup from "./pages/startToRegister/tryYup"
@@ -38,7 +33,7 @@ const routes = [
   { path: "StartToRegister/:type", component: InitialTest },
   { path: "/donater/:donater", component: DonaterDetailsForm },
   { path: "/needs-donation/:needs-donation", component: NeedsDonationDetailsForm },
-  { path: "/donater", component: DonaterForm },
+  { path: "/donater", component: DonaterDetailsForm },
   { path: "/needsDonation", component: NeedsDonationDetailsForm },
   { path: "/enterDataBase", component: EnterDataBase },
   { path: "/enterDataBase", component: AdjusmentFunction },
@@ -72,35 +67,35 @@ function App() {
   // const navigate = useNavigate();
   // const {currentUser}=useContext(AuthContext)
   return (<>
-<HomePage></HomePage>
+
     {/* <SignupForm></SignupForm> */}
     { /* <MedicalFormYup></MedicalFormYup>
     <MedicalFormState></MedicalFormState>
    <MedicalFormFormik></MedicalFormFormik> */}
     {/* <InatialTest></InatialTest> */}
-
-    {/* <Router>
+{/* <HomePage></HomePage> */}
+    <Router>
       <AuthContextProvider>
 
-        <AppBarr></AppBarr> */}
+        <AppBarr></AppBarr>
 
-        {/* <nav> */}
+        <nav>
           {/* <NavLink to="/">home page</NavLink><br></br>
           <NavLink to="/register">Register  </NavLink><br></br> */}
           {/* <NavLink to="/login">Login</NavLink><br></br> */}
-        {/* </nav> */}
-        {/* <Routes>
-          {routes.map((route) => <Route key={route.path} path={route.path} element={<route.component />} />)} */}
+        </nav>
+        <Routes>
+          {routes.map((route) => <Route key={route.path} path={route.path} element={<route.component />} />)}
           {/* <Route path="/" element={<Home />}></Route>
       <Route path="/login" element={<Login />}> </Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/StartToRegister/:typeId" element={<InitialTest />}></Route>
       <Route path="/donater" element={<DonaterDetailsForm></DonaterDetailsForm>}></Route>  */}
-        {/* </Routes>
+        </Routes>
 
 
       </AuthContextProvider>
-    </Router> */}
+    </Router>
   </>
   );
 }
