@@ -16,8 +16,7 @@ const NeedsDonationDetailsForm = () => {
     console.log("i'm in onSubmit function", values.id);
     const userId = currentUser.userId;
     const role='NEEDSDONATION';
-    // const idmedical_info_needsdonations = userId;
-    // const idpersonal_info_needsdonations= userId;
+
    
     try {
       if(currentUser.role!=null){
@@ -40,10 +39,8 @@ const NeedsDonationDetailsForm = () => {
       id: values?.id || '',
       first_name: values?.first_name || '',
       last_name: values?.last_name || '',
-      //has_pair: '',
       id_pair: values?.id_pair || '',
       //medical info table
-      //idmedical_info_needsdonations: '',
       height: values?.height || 7,
       weight: values?.weight || 7,
       birthDate: values?.birthDate || '',
@@ -58,7 +55,6 @@ const NeedsDonationDetailsForm = () => {
       psychosocial_assessment: values?.psychosocial_assessment || false,
       surgical_procedure: values?.surgical_procedure || false,
       //personal info table
-      //idpersonal_info_needsdonations: '',
       city: values?.city || '',
       address: values?.address || '',
       country: values?.country || '',
@@ -78,7 +74,6 @@ const NeedsDonationDetailsForm = () => {
    }
    catch(err){
     console.log(err);
-    //setErr(err.response.data?.message)
    }
     }
   

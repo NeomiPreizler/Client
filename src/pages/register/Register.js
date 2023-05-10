@@ -142,23 +142,6 @@ const Register = () => {
        );
     };
 
-    return (
-        <form >
-            <div className="login">
-
-             
-                <h1>Register page</h1>
-
-                <input type="text" onChange={(e)=>{ setUserName(e.target.value)}} value={userName} placeholder="please enter your name"></input>
-                <br></br>
-                {<input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="please enter your password"></input> }
-                <br></br>
-                <button type="submit" >Login</button>
-                {/* onClick={loginUser} */}
-                <br></br>
-                <Link to="/login">if your signed in enter here</Link>
-            </div>
-        </form>
-    )
+    
 }
 export default Register

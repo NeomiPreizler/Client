@@ -1,13 +1,9 @@
 import { TextField, Box, Button } from '@mui/material';
 import { useFormik } from "formik";
-import { func } from 'prop-types';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import * as yup from 'yup';
 import { AuthContext } from "../../context/authContext";
-
-
 
 const validationSchema = yup.object({
     height: yup
@@ -18,28 +14,18 @@ const InatialTest = () => {
     const navigate = useNavigate()
 
     const { type } = useParams();
-     const { currentUser } = useContext(AuthContext)
-    // console.log({ type });
+    const { currentUser } = useContext(AuthContext)
+
     const onSubmit = () => {
-        console.log("on submit",type)
-        // const check = true;
-        // if (typeof check == "boolean") {
-        if (type === "donater"){
-           console.log("donater in qustion");
-            navigate(`/donater`)
-        }
-            
-        if(type === "needsDonation"){
-           console.log("needsDonation in qustion");
-           navigate(`/needsDonation`);}
-        //else navigate(`/needsDonation`)
-        // }
-        // else {
-        //     alert(`${check}`);
-        // }
+        const message = checkDitials(values)
+        if (message.type === String)
+            alert(message);
+        else
+            navigate(`/needsDonation`)
+
     }
 
-    const {  handleSubmit,getFieldProps, errors } = useFormik({
+    const { values, handleSubmit, getFieldProps, errors } = useFormik({
         initialValues: {
             birthDate: new Date(),
             height: 7,
@@ -48,13 +34,11 @@ const InatialTest = () => {
         validationSchema,
         onSubmit,
     })
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    // };
 
-    const checkDitials = (birthDate, height, weight) => {
-        const age = calculateAge(birthDate);
-        const bmi = calculateBMI(height, weight);
+
+    const checkDitials = (values) => {
+        const age = calculateAge(values.birthDate);
+        const bmi = calculateBMI(values.height, values.weight);
         if (age < 20) {
             return "your younger then age 20";
         }
@@ -75,19 +59,15 @@ const InatialTest = () => {
         return bmi;
     }
 
-//     useEffect(() => {
-//         // if(currentUser!=null)
-//         // alert("You are not registered, you must register")
-// })
-
-
-
+    useEffect(() => {
+        if (currentUser != null)
+            alert("You are not registered, you must register")
+    })
     return (
         <>
 
-            {/* <Box  */}
+
             <form onSubmit={handleSubmit}
-                // component="form"
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
                 }}
@@ -126,15 +106,6 @@ const InatialTest = () => {
 
 
                 <Button type='submit' variant="text">ok</Button>
-                {/* </Box> */}
-                {/* <Box
-      sx={{
-        width: 500,
-        maxWidth: '100%',
-      }}
-    >
-      <TextField fullWidth label="fullWidth" id="fullWidth" />
-    </Box> */}
             </form>
         </>
     )

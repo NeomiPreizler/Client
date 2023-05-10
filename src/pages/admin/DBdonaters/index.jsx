@@ -7,20 +7,28 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
-
+import { AuthContext } from "../../../context/authContext";
+import { useContext } from "react";
 import axios from "axios";
 
 
 
 export const DBdonaters = () => {
   const [data, setData] = useState();
+  const { token } = useContext(AuthContext)
 
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    }}
   const loadData = async () => {
     console.log("DBdonaters");
-    const db = await axios.get("http://localhost:3600/api/donater")
+    try{
+    const db = await axios.get("http://localhost:3600/api/donater",config)
     console.log(db, "dbdbdbdb");
     setData(db.data);
-    console.log(data, "db");
+    console.log(data, "db");}
+    catch(err){console.log(err);}
   }
   // function createData(userId,id,email,first_name,last_name,avaliable,has_pair,id_pair){
   //   return{userId,id,email,first_name,last_name,avaliable,has_pair,id_pair};

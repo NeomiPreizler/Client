@@ -1,13 +1,12 @@
 import DonaterContext from "./DonaterContext"
 import {useContext} from "react"
-import { TextField, Button } from "@mui/material";
+import { TextField, Box,Button } from "@mui/material";
 
 
-const Step1BMI = () => {
+const Step1BMI = ({handleNext}) => {
   const { data, handleChange } = useContext(DonaterContext)
   return (    
-    <>
-    <div className="form-text">
+    <Box sx={{display:"flex", flexDirection:"column", gap:1}}>
           <TextField
             id="height"
             name="height"
@@ -16,8 +15,6 @@ const Step1BMI = () => {
             value={data.height}
             onChange={handleChange}
           />
-        </div>
-        <div className="form-text">
         <TextField
             id="weight"
             name="weight"
@@ -26,8 +23,6 @@ const Step1BMI = () => {
             value={data.weight}
             onChange={handleChange}
           />
-        </div>
-        <div className="form-text">
           <TextField
             type="date"
             name="birthDate"
@@ -38,10 +33,15 @@ const Step1BMI = () => {
             value={data.birthDate}
             onChange={handleChange}
           />
-        </div>
-    
-    </>
-    
+           <Button
+           disabled={!data.height||!data.birthDate||!data.weight}
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {'Continue'}
+                  </Button>
+        </Box>    
 
   )
 }

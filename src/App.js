@@ -1,34 +1,20 @@
 import Login from "./pages/login";
 import Home from "./pages/home";
 import Register from "./pages/register";
-import "./App.css";
-import useToken from './pages/useToken';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { NavLink } from "react-router-dom";
 import InitialTest from './pages/startToRegister/index';
-import DonaterDetailsForm from "./pages/donater";
+// import DonaterDetailsForm from "./pages/donater";
 import NeedsDonationDetailsForm from "./pages/needsDonation";
-// import SignupForm from "./pages/startToRegister/tryYupGabage"
 import { AuthContextProvider } from "./context/authContext";
 import { AppBarr } from "./pages/appBar";
-import { EnterDataBase } from "./pages/enterDataBase";
-import { AdjusmentFunction } from "./pages/adjusmentFunction";
+import { EnterDataBase } from "./pages/admin/enterDataBase";
+import { AdjusmentFunction } from "./pages/admin/adjusmentFunction";
 import { AdminScreen } from "./pages/admin";
-import { PreviousCrosses } from "./pages/previousCrosses";
-import { DBdonaters } from "./pages/DBdonaters";
-import DBneedsDonation from "./pages/DBneedsDonation";
+import { PreviousCrosses } from "./pages/previousMatches";
+import { DBdonaters } from "./pages/admin/DBdonaters";
+import DBneedsDonation from "./pages/admin/DBneedsDonation";
 import DonaterForm from "./pages/donaterWizard/donaterForm"
-import { DBusers } from "./pages/DBusers";
-//  import HomePage from "./pages/newHomePage";
-import  HomePage  from "./pages/homepagewithoutmui";
-// import  HomePage  from "./pages/homePageGpt";
-// import  HomePage  from "./pages/homePage3";
-
-
-// import { useNavigate } from "react-router-dom";
-// import { FileDownload } from "@mui/icons-material";
-// import MedicalFormYup from "./pages/startToRegister/tryYup"
-// import { AuthContext } from "//pages/context";
+import { DBusers } from "./pages/admin/DBusers";
 
 
 const routes = [
@@ -36,8 +22,8 @@ const routes = [
   { path: "/register", component: Register },
   { path: "/login", component: Login },
   { path: "StartToRegister/:type", component: InitialTest },
-  { path: "/donater/:donater", component: DonaterDetailsForm },
-  { path: "/needs-donation/:needs-donation", component: NeedsDonationDetailsForm },
+  // { path: "/donater/:donater", component: DonaterDetailsForm },
+  //{ path: "/needs-donation/:needs-donation", component: NeedsDonationDetailsForm },
   { path: "/donater", component: DonaterForm },
   { path: "/needsDonation", component: NeedsDonationDetailsForm },
   { path: "/enterDataBase", component: EnterDataBase },
@@ -46,61 +32,24 @@ const routes = [
   { path: "/admin", component: AdminScreen },
   { path: "/DBdonaters", component: DBdonaters },
   { path: "/DBneedsDonation", component: DBneedsDonation },
-  { path: "/test", component: <h1> Test</h1> },
-  // { path: "/DBusers", component: DBusers }
+  { path: "/DBusers", component: DBusers },
 ]
 
 
 function App() {
 
-  // const [token, setToken] = useState();
-  // function setToken(userToken) {
-  //   sessionStorage.setItem('token', JSON.stringify(userToken));
 
-  // }
-
-  // function getToken() {
-  //   const tokenString = sessionStorage.getItem('token');
-  //   const userToken = JSON.parse(tokenString);
-  //   return userToken?.token
-  // }
-  //const token = getToken;
-
-  // if(!token) {
-  //   return <Login setToken={setToken} />
-  // }
-  // const navigate = useNavigate();
-  // const {currentUser}=useContext(AuthContext)
   return (<>
-<HomePage></HomePage>
-    {/* <SignupForm></SignupForm> */}
-    { /* <MedicalFormYup></MedicalFormYup>
-    <MedicalFormState></MedicalFormState>
-   <MedicalFormFormik></MedicalFormFormik> */}
-    {/* <InatialTest></InatialTest> */}
-
-    {/* <Router>
-      <AuthContextProvider>
-
-        <AppBarr></AppBarr> */}
-
-        {/* <nav> */}
-          {/* <NavLink to="/">home page</NavLink><br></br>
-          <NavLink to="/register">Register  </NavLink><br></br> */}
-          {/* <NavLink to="/login">Login</NavLink><br></br> */}
-        {/* </nav> */}
-        {/* <Routes>
-          {routes.map((route) => <Route key={route.path} path={route.path} element={<route.component />} />)} */}
-          {/* <Route path="/" element={<Home />}></Route>
-      <Route path="/login" element={<Login />}> </Route>
-      <Route path="/register" element={<Register />}></Route>
-      <Route path="/StartToRegister/:typeId" element={<InitialTest />}></Route>
-      <Route path="/donater" element={<DonaterDetailsForm></DonaterDetailsForm>}></Route>  */}
-        {/* </Routes>
-
-
+  
+    <Router>
+      <AuthContextProvider> 
+        <AppBarr></AppBarr> 
+        
+        <Routes>
+          {routes.map((route) => <Route key={route.path} path={route.path} element={<route.component />} />)} 
+        </Routes>
       </AuthContextProvider>
-    </Router> */}
+    </Router>
   </>
   );
 }
