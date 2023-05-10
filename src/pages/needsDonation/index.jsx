@@ -10,21 +10,24 @@ const NeedsDonationDetailsForm = () => {
 
   const [values,setValues]=useState();
   const navigate = useNavigate();
-  const {currentUser}=useContext(AuthContext);
-
+  const {currentUser,token}=useContext(AuthContext);
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
   const onSubmit = async (values) => {
-    console.log("i'm in onSubmit function", values.id);
     const userId = currentUser.userId;
     const role='NEEDSDONATION';
 
    
     try {
       if(currentUser.role!=null){
-        await axios.put("http://localhost:3600/api/needDonation", {values,userId});
+        await axios.put("http://localhost:3600/api/needDonation", {values,config});
     
       }
       else{
-        await axios.post("http://localhost:3600/api/needDonation",{ values,userId,role});
+        await axios.post("http://localhost:3600/api/needDonation",{ values,config});
       }
 
     } catch (err) {
@@ -69,7 +72,7 @@ const NeedsDonationDetailsForm = () => {
       console.log("in load something");
       console.log(currentUser.userId);
       try{
-    const userDetails = await axios.get(`http://localhost:3600/api/needDonation/${currentUser.userId}`);
+    const userDetails = await axios.get(`http://localhost:3600/api/needDonation/needDonation`,config);
     setValues(userDetails.data)
    }
    catch(err){

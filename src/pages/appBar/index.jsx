@@ -29,7 +29,7 @@ export const AppBarr = () => {
   const navigate = useNavigate()
   const pages = ['Home', 'About Us', 'Donate', 'Get Donate', 'Medical information'];
   const routs = ['', 'About-us', 'Donater', 'needsDonation', 'MedicalInformation']
-  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+  //const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 
 
@@ -45,7 +45,6 @@ export const AppBarr = () => {
   };
 
   const handleCloseNavMenu = (page) => {
-
     navigate(`/${page}`)
     setAnchorElNav(null);
   };
