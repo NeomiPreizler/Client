@@ -83,27 +83,27 @@ export const DonaterProvider = ({ children }) => {
   };
   const loadDataUser = async () => {
     console.log("currentUser", currentUser)
-    if (currentUser.role != null) {
-      try {
-        const { data } = await axios.get(
-          "http://localhost:3600/api/donater/donator", config
-        );
-        console.log("this is the orignal data", data)
-        //merge object
-        let mergeObj = {
-          ...data,
-          ...data.donaterMedical,
-          ...data.donaterPersonal,
-        };
-        if (mergeObj.birthDate) {
-          mergeObj.birthDate = new Date(mergeObj.birthDate).toISOString().slice(0, 10)
-        }
-        setData(mergeObj);
-      } catch (err) {
-        console.log("error");
-      }
+    // if (currentUser && currentUser?.role != null) {
+    //   try {
+    //     const { data } = await axios.get(
+    //       "http://localhost:3600/api/donater/donator", config
+    //     );
+    //     console.log("this is the orignal data", data)
+    //     //merge object
+    //     let mergeObj = {
+    //       ...data,
+    //       ...data.donaterMedical,
+    //       ...data.donaterPersonal,
+    //     };
+    //     if (mergeObj.birthDate) {
+    //       mergeObj.birthDate = new Date(mergeObj.birthDate).toISOString().slice(0, 10)
+    //     }
+    //     setData(mergeObj);
+    //   } catch (err) {
+    //     console.log("error");
+    //   }
 
-    }
+    // }
   };
   useEffect(() => {
     loadDataUser();

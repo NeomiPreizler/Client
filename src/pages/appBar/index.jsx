@@ -24,41 +24,32 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 export const AppBarr = () => {
 
-  const { currentUser } = useContext(AuthContext)
-  const { logout } = useContext(AuthContext)
-  const navigate = useNavigate()
-  const pages = ['Home', 'About Us', 'Donate', 'Get Donate', 'Medical information'];
-  const routs = ['', 'About-us', 'Donater', 'needsDonation', 'MedicalInformation']
-  //const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+    const { currentUser } = useContext(AuthContext)
+    const { logout } = useContext(AuthContext)
+    const navigate=useNavigate()
+    const pages = ['Home', 'About Us', 'Donate','Need a donation','Medical information'];
+    const routs = ['','About-us','Donater','needsDonation','MedicalInformation']
 
 
 
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+ 
 
   const handleCloseNavMenu = (page) => {
+    
     navigate(`/${page}`)
-    setAnchorElNav(null);
+  
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  
 
-  return (
-
+    return (
+ 
     <AppBar style={{ background: "#528161" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img style={{ width: "5%" }} src='..\..\img\lifecycle.png' href='./home' onClick={navigate('/')}></img>
+       <img style={{width:"5%"}} src='..\..\img\lifecycle.png' href='./home' onClick={navigate('/')}></img>
+        
           <Typography
             variant="h6"
             noWrap
@@ -77,42 +68,9 @@ export const AppBarr = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page, i) => (
-                <MenuItem key={page} onClick={() => handleCloseNavMenu(routs[i])}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+ 
           <Typography
             variant="h5"
             noWrap
@@ -131,10 +89,10 @@ export const AppBarr = () => {
           >
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page, i) => (
+            {pages.map((page,i) => (
               <Button
                 key={page}
-                onClick={() => handleCloseNavMenu(routs[i])}
+                onClick={()=>handleCloseNavMenu(routs[i])}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -142,7 +100,7 @@ export const AppBarr = () => {
             ))}
           </Box>
 
-
+      
           {currentUser ? <></> : <Button color="inherit" style={{ background: "#77a485" }} href="/login">Login</Button>}
           {currentUser ? <Button style={{ background: "#77a485" }} onClick={() => { logout() }} >Logout</Button> : <Button color="inherit" href='/register' >Rgister</Button>}
 
@@ -153,4 +111,4 @@ export const AppBarr = () => {
 
 
 
-}
+        }

@@ -1,61 +1,132 @@
-// import * as React from 'react';
-// import { alpha, styled } from '@mui/material/styles';
-// import { DataGrid, gridClasses } from '@mui/x-data-grid';
-// import { useDemoData } from '@mui/x-data-grid-generator';
-// // import { FileDownload } from "@mui/icons-material";
-// // import { DataGrid } from '@mui/x-data-grid'
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from "../../../context/authContext";
+import { useContext } from "react";
+import axios from "axios";
 
-// const ODD_OPACITY = 0.2;
 
-// const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
-//   [`& .${gridClasses.row}.even`]: {
-//     backgroundColor: theme.palette.grey[200],
-//     '&:hover, &.Mui-hovered': {
-//       backgroundColor: alpha(theme.palette.primary.main, ODD_OPACITY),
-//       '@media (hover: none)': {
-//         backgroundColor: 'transparent',
-//       },
-//     },
-//     '&.Mui-selected': {
-//       backgroundColor: alpha(
-//         theme.palette.primary.main,
-//         ODD_OPACITY + theme.palette.action.selectedOpacity,
-//       ),
-//       '&:hover, &.Mui-hovered': {
-//         backgroundColor: alpha(
-//           theme.palette.primary.main,
-//           ODD_OPACITY +
-//             theme.palette.action.selectedOpacity +
-//             theme.palette.action.hoverOpacity,
-//         ),
-//         // Reset on touch devices, it doesn't add specificity
-//         '@media (hover: none)': {
-//           backgroundColor: alpha(
-//             theme.palette.primary.main,
-//             ODD_OPACITY + theme.palette.action.selectedOpacity,
-//           ),
-//         },
-//       },
-//     },
-//   },
-// }));
 
-const DBneedsDonation=()=> {
-//   const { data, loading } = useDemoData({
-//     dataSet: 'Employee',
-//     rowLength: 200,
-//   });
+ const DBneedsDonation = () => {
+  const [data, setData] = useState();
+  const { token } = useContext(AuthContext)
 
-//   return (
-//     <div style={{ height: 400, width: '100%' }}>
-//       <StripedDataGrid
-//         loading={loading}
-//         {...data}
-//         getRowClassName={(params) =>
-//           params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
-//         }
-//       />
-//     </div>
-//   );
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    }}
+  const loadData = async () => {
+    console.log("DBdonaters");
+    try{
+    const db = await axios.get("http://localhost:3600/api/needDonation",config)
+    console.log(db, "dbdbdbdb");
+    setData(db.data);
+    console.log(data, "db");}
+    catch(err){console.log(err);}
+  }
+  // function createData(userId,id,email,first_name,last_name,avaliable,has_pair,id_pair){
+  //   return{userId,id,email,first_name,last_name,avaliable,has_pair,id_pair};
+  // }
+
+
+  useEffect(() => {
+    loadData();
+  }, []);
+  //const navigate = useNavigate()
+
+  return (
+
+    <TableContainer>
+
+      <Table>
+
+        <TableHead>
+
+          <TableRow>
+
+            <TableCell>userId</TableCell>
+
+            <TableCell>id</TableCell>
+
+            <TableCell>email</TableCell>
+
+            <TableCell>first_name</TableCell>
+
+            <TableCell>last_name</TableCell>
+
+            <TableCell>avaliable</TableCell>
+
+            <TableCell>has_pair</TableCell>
+
+            <TableCell>id_pair</TableCell>
+
+
+
+            {/* <TableCell>Status</TableCell> */}
+
+          </TableRow>
+
+        </TableHead>
+
+        <TableBody>
+
+          {data?.map(data => {
+
+            const { userId, id, email, first_name, last_name, avaliable, has_pair, id_pair } = data
+
+
+            return (
+
+              <TableRow
+
+                key={id}
+
+                sx={{ cursor: 'pointer' }}
+
+              // onClick={() =>
+
+              //     navigate(`/facility/${facility.id}/requests/${id}`)
+
+              // }
+
+              >
+
+                <TableCell align="left">{userId}</TableCell>
+
+                <TableCell align="left">{id}</TableCell>
+
+                <TableCell align="left">{email}</TableCell>
+
+                <TableCell align="left">{first_name}</TableCell>
+
+                <TableCell align="left">{last_name}</TableCell>
+
+                <TableCell align="left">{avaliable}</TableCell>
+
+                <TableCell align="left">{has_pair}</TableCell>
+
+                <TableCell align="left">{id_pair}</TableCell>
+
+
+              </TableRow>
+
+            )
+
+          })}
+
+        </TableBody>
+
+      </Table>
+
+    </TableContainer>
+
+  )
+
 }
 export default DBneedsDonation;

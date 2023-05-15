@@ -68,6 +68,7 @@ const NeedsDonationDetailsForm = () => {
     onSubmit,
   })
   const loadDataUser= async()=>{
+    if(currentUser!=null){
     if (currentUser.role!=null){
       console.log("in load something");
       console.log(currentUser.userId);
@@ -78,9 +79,7 @@ const NeedsDonationDetailsForm = () => {
    catch(err){
     console.log(err);
    }
-    }
-  
-   
+    }}
   }
 
   
