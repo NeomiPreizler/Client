@@ -15,9 +15,10 @@ const DonaterContainer = () => {
        
 
         <form className="form donator-form" onSubmit={handleSubmit}>
-
+{/* {title[page]} */}
             <header className="form-header">
-                <h2>{title[page]}</h2>
+                <h2>Details completion form</h2>
+                <h4>You must fill all fields to proceed to the next step</h4>
             </header>
             <DonaterStepsContainer />
         </form>

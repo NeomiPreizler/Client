@@ -27,8 +27,8 @@ function Home() {
       <main>
         <section className="jumbotron jumbotron-fluid text-white bg-primary">
           <Card sx={{ padding: '2%', backgroundColor: '#dfece3', gridGap: '30px', margin: "top", padding: '5px' }}>
-            <Typography variant='h3'>Kidney Donation</Typography>
-            <Typography>Donate your kidney and save a life today</Typography>
+            <Typography variant='h3'>Cross-over Kidneys Transplante</Typography>
+            <Typography>In cross-transplantation, patients who cannot be given a kidney from their own relative for immunological reasons receive a kidney from a relative of another patient in exchange for a kidney from their relative.</Typography>
           </Card>
         </section>
         {currentUser && <>{currentUser.role === "ADMIN" ? <Button variant="contained" href="/admin">enter management screen</Button> : <></>}

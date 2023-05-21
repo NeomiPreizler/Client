@@ -27,7 +27,7 @@ const DonaterStepsContainer = () => {
 
       <Step>
         <StepLabel onClick={() => setActiveStep(0)}>
-          0-BMI
+          BMI
         </StepLabel>
         <StepContent>
           <Step1BMI handleNext={handleNext} />    <Box sx={{ mb: 2 }}>
@@ -42,21 +42,21 @@ const DonaterStepsContainer = () => {
       <Step >
         <StepLabel onClick={() => setActiveStep(1)}
         >
-          1- user  details              </StepLabel>
+          user details              </StepLabel>
         <StepContent>
           <Step2UserDetails handleNext={handleNext} />
         </StepContent>
       </Step>
       <Step >
         <StepLabel onClick={() => setActiveStep(2)}>
-          2- user medical details  </StepLabel>
+          user medical details  </StepLabel>
         <StepContent>
           <Step3MedicalInfo handleNext={handleNext}></Step3MedicalInfo>
         </StepContent>
       </Step>
       <Step >
         <StepLabel onClick={() => setActiveStep(3)}>
-          3- submit  </StepLabel>
+          submit  </StepLabel>
         <StepContent>
           <StepComplete handleNext={handleNext}></StepComplete>
         </StepContent>

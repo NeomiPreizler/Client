@@ -83,27 +83,27 @@ export const DonaterProvider = ({ children }) => {
   };
   const loadDataUser = async () => {
     console.log("currentUser", currentUser)
-    // if (currentUser && currentUser?.role != null) {
-    //   try {
-    //     const { data } = await axios.get(
-    //       "http://localhost:3600/api/donater/donator", config
-    //     );
-    //     console.log("this is the orignal data", data)
-    //     //merge object
-    //     let mergeObj = {
-    //       ...data,
-    //       ...data.donaterMedical,
-    //       ...data.donaterPersonal,
-    //     };
-    //     if (mergeObj.birthDate) {
-    //       mergeObj.birthDate = new Date(mergeObj.birthDate).toISOString().slice(0, 10)
-    //     }
-    //     setData(mergeObj);
-    //   } catch (err) {
-    //     console.log("error");
-    //   }
+    if (currentUser && currentUser?.role != null) {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:3600/api/donater/donator", config
+        );
+        console.log("this is the orignal data", data)
+        //merge object
+        let mergeObj = {
+          ...data,
+          ...data.donaterMedical,
+          ...data.donaterPersonal,
+        };
+        if (mergeObj.birthDate) {
+          mergeObj.birthDate = new Date(mergeObj.birthDate).toISOString().slice(0, 10)
+        }
+        setData(mergeObj);
+      } catch (err) {
+        console.log("error");
+      }
 
-    // }
+    }
   };
   useEffect(() => {
     loadDataUser();
@@ -114,7 +114,7 @@ export const DonaterProvider = ({ children }) => {
     try {
       if (currentUser.role != null) {
         await axios.put("http://localhost:3600/api/donater", data, config);
-        navigate('/')
+       // navigate('/')
       } else {
         await axios.post("http://localhost:3600/api/donater", data, config);
       }
