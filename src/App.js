@@ -16,7 +16,10 @@ import DBneedsDonation from "./pages/admin/DBneedsDonation";
 import DonaterForm from "./pages/donaterWizard/donaterForm"
 import { DBusers } from "./pages/admin/DBusers";
 import Nav from "./pages/appBar";
-
+import DonateInformatiun from "./pages/medicalInformation/matnatChaim"
+import CrossoverDonationPage from "./pages/about";
+import MedicalInformationPage from "./pages/medicalInformation";
+import MedicalInformationPage1 from "./pages/medicalInformation/needsdonation";
 
 const routes = [
   { path: "/", component: Home },
@@ -41,16 +44,19 @@ function App() {
 
 
   return (<>
-  
-    <Router>
+<MedicalInformationPage1></MedicalInformationPage1>
+  {/* <MedicalInformationPage></MedicalInformationPage> */}
+  {/* <CrossoverDonationPage></CrossoverDonationPage> */}
+  {/* <DonateInformatiun></DonateInformatiun> */}
+   {/*  <Router>
       <AuthContextProvider> 
-       {/* <AppBarr></AppBarr>   */}
-        <Nav />
+        <AppBarr></AppBarr>   */}
+        {/* <Nav />
         <Routes>
           {routes.map((route) => <Route key={route.path} path={route.path} element={<route.component />} />)} 
         </Routes>
-      </AuthContextProvider>
-    </Router>
+      </AuthContextProvider> 
+    </Router> */}
   </>
   );
 }
