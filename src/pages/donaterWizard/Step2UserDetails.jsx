@@ -10,7 +10,7 @@ const Step2UserDetails = ({handleNext}) => {
 
   return (
     <>
-      <div className="form-text">
+      <div classNameName="form-text">
         <TextField
           type="text"
           name="id"
@@ -21,7 +21,7 @@ const Step2UserDetails = ({handleNext}) => {
           onChange={handleChange}
         />
       </div>
-      <div className="form-text">
+      <div classNameName="form-text">
         <TextField
           type="text"
           name="first_name"
@@ -32,7 +32,7 @@ const Step2UserDetails = ({handleNext}) => {
           onChange={handleChange}
         />
       </div>
-      <div className="form-text">
+      <div classNameName="form-text">
         <TextField
           type="text"
           name="last_name"
@@ -43,7 +43,7 @@ const Step2UserDetails = ({handleNext}) => {
           onChange={handleChange}
         />
       </div>
-      <div className="form-text">
+      <div classNameName="form-text">
         <TextField
           type="text"
           name="id_pair"
@@ -54,7 +54,7 @@ const Step2UserDetails = ({handleNext}) => {
           onChange={handleChange}
         />
       </div>
-      <div className="form-text">
+      <div classNameName="form-text">
         <TextField
           type="text"
           name="city"
@@ -65,7 +65,7 @@ const Step2UserDetails = ({handleNext}) => {
           onChange={handleChange}
         />
       </div>
-      <div className="form-text">
+      <div classNameName="form-text">
         <TextField
           type="text"
           name="address"
@@ -76,7 +76,7 @@ const Step2UserDetails = ({handleNext}) => {
           onChange={handleChange}
         />
       </div>
-      <div className="form-text">
+      <div classNameName="form-text">
         <TextField
           type="text"
           name="country"
@@ -87,7 +87,7 @@ const Step2UserDetails = ({handleNext}) => {
           onChange={handleChange}
         />
       </div>
-      <div className="form-text">
+      <div classNameName="form-text">
         <TextField
           type="number"
           name="phone_number"
@@ -99,7 +99,7 @@ const Step2UserDetails = ({handleNext}) => {
         />
       </div>
 
-      <div className="form-text">
+      <div classNameName="form-text">
         <TextField
           type="number"
           name="cell_phone"
@@ -110,7 +110,7 @@ const Step2UserDetails = ({handleNext}) => {
           onChange={handleChange}
         />
       </div>
-      <div className="form-text">
+      <div classNameName="form-text">
         <Select
           labelId="gender"
           name="gender"

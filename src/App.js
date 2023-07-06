@@ -1,6 +1,6 @@
-import Login from "./pages/login";
+import Login from "./pages/login/index3";
 import Home from "./pages/home";
-import Register from "./pages/register";
+import Register from "./pages/register/index3";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import InitialTest from './pages/startToRegister/index';
 // import DonaterDetailsForm from "./pages/donater";
@@ -18,14 +18,16 @@ import { DBusers } from "./pages/admin/DBusers";
 import Nav from "./pages/appBar";
 import DonateInformatiun from "./pages/medicalInformation/matnatChaim"
 import CrossoverDonationPage from "./pages/about";
-import MedicalInformationPage from "./pages/medicalInformation";
-import MedicalInformationPage1 from "./pages/medicalInformation/needsdonation";
+import MedicalInformationDonors from "./pages/medicalInformation/donaterDetails";
+import MedicalInformationNeedies from "./pages/medicalInformation/neediesDetails";
+import Footer from "./pages/appBar/footer";
+// import Nomi from "./pages/neomi";
 
 const routes = [
   { path: "/", component: Home },
   { path: "/register", component: Register },
   { path: "/login", component: Login },
-  { path: "StartToRegister/:type", component: InitialTest },
+  // { path: "StartToRegister/:type", component: InitialTest },
   // { path: "/donater/:donater", component: DonaterDetailsForm },
   //{ path: "/needs-donation/:needs-donation", component: NeedsDonationDetailsForm },
   { path: "/donater", component: DonaterForm },
@@ -37,6 +39,10 @@ const routes = [
   { path: "/DBdonaters", component: DBdonaters },
   { path: "/DBneedsDonation", component: DBneedsDonation },
   { path: "/DBusers", component: DBusers },
+  { path: "/about-us", component: CrossoverDonationPage },
+  {path: "/donater-medical-details",component:MedicalInformationDonors},
+  {path: "/needy-medical-details",component:MedicalInformationNeedies}
+
 ]
 
 
@@ -44,19 +50,20 @@ function App() {
 
 
   return (<>
-<MedicalInformationPage1></MedicalInformationPage1>
-  {/* <MedicalInformationPage></MedicalInformationPage> */}
-  {/* <CrossoverDonationPage></CrossoverDonationPage> */}
-  {/* <DonateInformatiun></DonateInformatiun> */}
-   {/*  <Router>
-      <AuthContextProvider> 
-        <AppBarr></AppBarr>   */}
-        {/* <Nav />
+    {/* <Nomi></Nomi> */}
+ {/* <MedicalInformationDonors></MedicalInformationDonors> */}
+    {/* <CrossoverDonationPage></CrossoverDonationPage> */}
+    {/* <DonateInformatiun></DonateInformatiun> */}
+    <Router>
+      <AuthContextProvider>
+
+        <Nav />
         <Routes>
-          {routes.map((route) => <Route key={route.path} path={route.path} element={<route.component />} />)} 
+          {routes.map((route) => <Route key={route.path} path={route.path} element={<route.component />} />)}
         </Routes>
-      </AuthContextProvider> 
-    </Router> */}
+        <Footer></Footer>
+      </AuthContextProvider>
+    </Router>
   </>
   );
 }

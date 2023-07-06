@@ -10,7 +10,7 @@ const Step3MedicalInfo = ({ handleNext }) => {
   return (
     <>
 
-      <div className="form-text">
+      <div classNameName="form-text">
         <FormControlLabel
           control={
             <Checkbox
@@ -26,7 +26,7 @@ const Step3MedicalInfo = ({ handleNext }) => {
 
       </div>
       {data.high_blood_pressure}
-      <div className="form-text">
+      <div classNameName="form-text">
         <Select
           labelId="blood_type"
           name="blood_type"

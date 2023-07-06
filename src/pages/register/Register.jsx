@@ -34,9 +34,9 @@ const Register = () => {
         return (
           <>
             <label htmlFor={props.id || props.name}>{label}</label>
-            <input className="text-input" {...field} {...props} />
+            <input classNameName="text-input" {...field} {...props} />
             {meta.touched && meta.error ? (
-              <div className="error">{meta.error}</div>
+              <div classNameName="error">{meta.error}</div>
             ) : null}
           </>
         );
@@ -50,12 +50,12 @@ const Register = () => {
         const [field, meta] = useField({ ...props, type: 'checkbox' });
         return (
           <div>
-            <label className="checkbox-input">
+            <label classNameName="checkbox-input">
               <input type="checkbox" {...field} {...props} />
               {children}
             </label>
             {meta.touched && meta.error ? (
-              <div className="error">{meta.error}</div>
+              <div classNameName="error">{meta.error}</div>
             ) : null}
           </div>
         );
@@ -68,7 +68,7 @@ const Register = () => {
             <label htmlFor={props.id || props.name}>{label}</label>
             <select {...field} {...props} />
             {meta.touched && meta.error ? (
-              <div className="error">{meta.error}</div>
+              <div classNameName="error">{meta.error}</div>
             ) : null}
           </div>
         );

@@ -1,12 +1,23 @@
 import React from 'react';
-
-function MedicalInformationPage() {
+import '../css/title.css'
+function MedicalInformationDonors() {
   return (
     <div>
       <header>
-        <nav>
-          {/* Navigation bar with logo, registration, login, and other options */}
-        </nav>
+      <section className="page-title bg-1">
+  <div className="overlay"></div>
+  <div className="container">
+    <div className="row">
+      <div className="col-md-12">
+        <div className="text-center">
+        <div className="divider mb-3 title"></div>
+          <h1 className="text-capitalize mb-5 text-lg">The Donor's Information</h1>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
       </header>
       <main>
         <section>
@@ -56,4 +67,4 @@ function MedicalInformationPage() {
   );
 }
 
-export default MedicalInformationPage;
+export default MedicalInformationDonors;

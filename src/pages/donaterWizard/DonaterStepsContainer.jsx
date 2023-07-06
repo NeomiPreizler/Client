@@ -22,7 +22,7 @@ const DonaterStepsContainer = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  return (<Box sx={{ maxWidth: 400 }}>
+  return (<Box sx={{ maxWidth: 400 ,pl:10,mt:8 }}>
     <Stepper activeStep={activeStep} orientation="vertical">
 
       <Step>

@@ -1,66 +1,74 @@
+import { Box, textAlign } from '@mui/system';
 import React from 'react';
-
+import '../css/title.css'
 function CrossoverDonationPage() {
-    return(
+  return (
+    <div>
+      <header>
 
- 
-        <div>
-          <header>
-            <nav>
-              {/* Navigation bar with logo, registration, login, and other options */}
-            </nav>
-          </header>
-          <main>
-            <section>
-              {/* Image and animation of "Giving is receiving - in circles" */}
-            </section>
-            <section>
-              <h2>About Our Website</h2>
-              <p>
-                Welcome to our kidney donation platform! We aim to connect individuals in need of a kidney transplant with
-                willing donors, even if their own family members are not suitable donors. Our unique approach, inspired by
-                the concept of a life cycle, ensures that everyone has an opportunity to give and receive the gift of life.
-              </p>
-              <p>
-                Our website allows individuals to enter their medical data and the details of their family members who wish to
-                donate a kidney. By collecting and storing this information, we facilitate the matching process between donors
-                and recipients. Through a carefully designed system, we ensure that the circle of giving and receiving is
-                completed, creating a positive impact on the lives of those involved.
-              </p>
-            </section>
-            <section>
-              <h2>Data Entry and Matching</h2>
-              <p>
-                Our website provides easy-to-use forms for both donors and individuals in need of a kidney transplant. Donors
-                can enter their medical data and indicate their willingness to donate. Similarly, those in need of a kidney
-                can provide their medical information and details of their family members who wish to donate on their behalf.
-              </p>
-              <p>
-                Once the data is entered, our system performs a sophisticated matching process to identify potential matches
-                between donors and recipients. Through advanced algorithms, we ensure compatibility and maximize the chances
-                of successful kidney transplantation.
-              </p>
-            </section>
-            <section>
-              <h2>Join Us and Make a Difference</h2>
-              <p>
-                We invite you to join our community and be a part of the life cycle of kidney donation. By registering on our
-                website, you can contribute to saving lives and bringing hope to individuals in need. Together, we can create
-                a powerful network of support and make a meaningful impact in the lives of those affected by kidney disease.
-              </p>
-              <p>
-                Take the first step towards making a difference by signing up and filling out the necessary forms. Your
-                contribution can help close the circles of giving and receiving, bringing new hope and renewed life to those
-                in need.
-              </p>
-            </section>
-          </main>
-          <footer>
-            {/* Footer content */}
-          </footer>
-        </div>
-     
-   
+          <section className="page-title bg-1">
+            <div className="overlay"></div>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="text-center">
+                    <div className="divider mb-3 title"></div>
+                    <h1 className="text-capitalize mb-5 text-lg">About Us</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      </header>
+      <Box sx={{pl:8,pt:5}}>
+        <section>
+          <h2>About Our Website</h2>
+          <div class="divider mb-3 title" style={{marginRight: "auto!importent",marginLeft:"0em"}}></div>
+          <p>
+            Welcome to our kidney donation platform! We aim to connect individuals in need of a kidney transplant with
+            willing donors, even if their own family members are not suitable donors. Our unique approach, inspired by
+            the concept of a life cycle, ensures that everyone has an opportunity to give and receive the gift of life.
+          </p>
+          <p>
+            Our website allows individuals to enter their medical data and the details of their family members who wish to
+            donate a kidney. By collecting and storing this information, we facilitate the matching process between donors
+            and recipients. Through a carefully designed system, we ensure that the circle of giving and receiving is
+            completed, creating a positive impact on the lives of those involved.
+          </p>
+        </section>
+        <section>
+          <h2>Data Entry and Matching</h2>
+          <div class="divider mb-3 title" style={{marginRight: "auto!importent",marginLeft:"0em"}}></div>
+
+          <p>
+            Our website provides easy-to-use forms for both donors and individuals in need of a kidney transplant. Donors
+            can enter their medical data and indicate their willingness to donate. Similarly, those in need of a kidney
+            can provide their medical information and details of their family members who wish to donate on their behalf.
+          </p>
+          <p>
+            Once the data is entered, our system performs a sophisticated matching process to identify potential matches
+            between donors and recipients. Through advanced algorithms, we ensure compatibility and maximize the chances
+            of successful kidney transplantation.
+          </p>
+        </section>
+        <section>
+          <h2>Join Us and Make a Difference</h2>
+          <div class="divider mb-3 title" style={{marginRight: "auto!importent",marginLeft:"0em"}}></div>
+
+          <p>
+            We invite you to join our community and be a part of the life cycle of kidney donation. By registering on our
+            website, you can contribute to saving lives and bringing hope to individuals in need. Together, we can create
+            a powerful network of support and make a meaningful impact in the lives of those affected by kidney disease.
+          </p>
+          <p>
+            Take the first step towards making a difference by signing up and filling out the necessary forms. Your
+            contribution can help close the circles of giving and receiving, bringing new hope and renewed life to those
+            in need.
+          </p>
+        </section></Box>
+        </div >
+
+
 //   return (
 //     <div>
 //       <h1>Cross-Over Kidney Donation</h1>

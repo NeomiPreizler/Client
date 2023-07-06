@@ -1,86 +1,80 @@
+import '../css/home.css';
 import { React } from 'react';
 import { Box, Button, Typography, Card, DialogActions } from "@mui/material"
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useContext } from "react";
 import ResponsiveDialog from "./Dialog";
-function Home() {
+import AlertDialogSlide from "./Dialog2"
+import { WidthWide } from '@mui/icons-material';
+export default function Home() {
+
 
   const { currentUser } = useContext(AuthContext)
   const navigate = useNavigate()
-  return (<>
-
-    {/* {currentUser.role == null ? <>
-        <Button variant="contained" style={{ background: "#7bb28c" }} onClick={() => navigate(`/donater`)}>donater</Button><br></br><br></br>
-        <Button variant="contained" style={{ background: "#7bb28c" }} onClick={() => navigate(`StartToRegister/${'needsDonation'}`)}>needsDonation</Button></> : <></>
-
-      } */}
-
-
-    {/* {currentUser == null ? <>
-      <Button variant="contained" style={{ background: "#7bb28c" }} onClick={() => navigate(`/donater`)}>donater</Button><br></br><br></br>
-      <Button variant="contained" style={{ background: "#7bb28c" }} onClick={() => navigate(`StartToRegister/${'needsDonation'}`)}>needsDonation</Button></> : <></>
-    } */}
-
+  return (<><section className="banner">
     <div className="container">
+      <div className="row">
 
-      <main>
-        <section className="jumbotron jumbotron-fluid text-white bg-primary">
-          <Card sx={{ padding: '2%', backgroundColor: '#dfece3', gridGap: '30px', margin: "top", padding: '5px' }}>
-            <Typography variant='h3'>Cross-over Kidneys Transplante</Typography>
-            <Typography>In cross-transplantation, patients who cannot be given a kidney from their own relative for immunological reasons receive a kidney from a relative of another patient in exchange for a kidney from their relative.</Typography>
-          </Card>
-        </section>
-        {currentUser && <>{currentUser.role === "ADMIN" ? <Button variant="contained" href="/admin">enter management screen</Button> : <></>}
-          {currentUser.role === "DONATER" ? <Box sx={{ display: "grid", gridGap: '10px', gridTemplateColumns: "repeat(3, minmax(0,1fr))", padding: '5px' }}>
-            <Button variant="contained" href="/donater">your form</Button>
-            <Button variant="contained" href="/donater">change your pair</Button>
-            <Button variant="contained" href="/donater">delete </Button>
-          </Box> : <></>}
-          {currentUser.role === "NEEDSDONATION" ? <Button variant="contained" href="/needsDonation">your form</Button> : <></>}
-        </>}
+        <div className=".col-lg-6-col-md-12-col-xl-7">
+          <div className="block">
+            <div className="divider mb-3"></div>
+            <span className="text-uppercase text-sm letter-spacing ">Final kidney patients solution</span>
+            <h1 className="mb-3 mt-3">Cross-over Kidneys Transplante</h1>
 
-
-
-        <section className="py-5">
-          <div className="container">
-
-            <div >
-              <Box sx={{ display: "grid", gridGap: '10px', gridTemplateColumns: "repeat(3, minmax(0,1fr))", padding: '5px' }}>
-                <Box sx={{ boxShadow: 6, alignItems: "center", justifyContent: "center", display: "grid" }}>
-                  <img style={{ width: "100%" }} src="..\..\img\kidneys.jpg" alt="Card image cap" />
-                  <div style={{ padding: '2%' }}>
-                    <Typography variant='h5' >Who Can Donate?</Typography>
-                    <Typography >Find out if you are eligible to donate your kidney and how to get started.</Typography>
-                    <Button style={{ background: "#7bb28c" }} href="#">Learn More</Button>
-                  </div>
-                </Box>
-
-                <Box sx={{ boxShadow: 6, alignItems: "center", justifyContent: "center", display: "grid" }}>
-                  <img style={{ width: "100%" }} src="..\..\img\circle.jpg" alt="Card image cap" />
-                  <div style={{ padding: '2%' }}>
-                    <Typography variant='h5' >How It Works?</Typography>
-                    <Typography >Learn about the benefits of Cross-Linked Kidney Donation by 'LifeCycle' and how it can change people's lives.</Typography>
-                    <Button style={{ background: "#7bb28c" }} href="#">Learn More</Button>
-                  </div>
-                </Box>
-
-                <Box sx={{ boxShadow: 6, alignItems: "center", justifyContent: "center", display: "grid" }}>
-                  <img style={{ width: "100%" }} src="..\..\img\maxresdefault.jpg" alt="Card image cap" />
-                  <div style={{ padding: '2%' }}>
-                    <Typography variant='h5' >Filling forms</Typography>
-                    <Typography >Ready to donate your kidney? needs a kidney donation?  Find out how to get started and make a difference.</Typography>
-                    {/* {!currentUser? */}
-                    <ResponsiveDialog>Learn More</ResponsiveDialog>
-                    {/* <Button style={{ background: "#7bb28c" }} href="/" >Learn More</Button>} */}
-                  </div>
-                </Box>
-              </Box></div>
+            
+          <p className="mb-4 pr-5">In cross-transplantation, patients who cannot be given a kidney from their own relative for immunological reasons receive a kidney from a relative of another patient in exchange for a kidney from their relative.</p>
+          {currentUser?<></>:
+            <div className="btn-container ">
+              <a onClick={()=>{navigate('/register')}} className="btn btn-main-2 btn-icon btn-round-full">Subscribe<ArrowRightIcon sx={{ "height": "12px" }}></ArrowRightIcon></a>
+            </div>}
           </div>
-        </section>
-      </main>
-    </div></>
+        </div>
+        <div className="row2"></div>
+      </div>
+    </div>
+  </section>
 
-  )
+
+    <section className="features">
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="feature-block d-lg-flex">
+              <div className="feature-item mb-5 mb-lg-0">
+                <div className="feature-img mb-4">
+                  <img style={{ width: "28%" }} className="img-home" src="..\..\img\how can donate.jpg"></img>
+                </div>
+                <h4 className="mb-3">How It Works?</h4>
+                <p className="mb-4">Learn about the benefits of Cross-Linked Kidney Donation by 'LifeCycle' and how it can change people's lives.</p>
+                <a href="/about-us" className="btn btn-main btn-round-full">Learn More</a>
+              </div>
+
+              <div className="feature-item mb-5 mb-lg-0">
+                <div className="feature-img mb-4">
+                  <img className="img-home" src="..\..\img\who can donate.jpg" ></img>
+                </div>
+                <h4 className="mb-3">Who Can Donate?</h4>
+                <p className="mb-4">Find out if you are eligible to donate your kidney and how to get started.</p><br></br>
+                <AlertDialogSlide></AlertDialogSlide>
+              </div>
+
+              <div className="feature-item mb-5 mb-lg-0">
+                <div className="feature-img mb-4">
+                  <img className="img-home" src="..\..\img\medical files.jpg" ></img>
+                </div>
+                <h4 className="mb-3">Filling forms</h4>
+                <p>Ready to donate your kidney? needs a kidney donation?  Find out how to get started and make a difference.</p>
+                <ResponsiveDialog>Learn More</ResponsiveDialog>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section></>)
 }
-export default Home;
+
+
+

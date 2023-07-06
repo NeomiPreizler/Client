@@ -9,10 +9,14 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { AuthContext } from "../../context/authContext";
 import { useContext } from "react";
- function ResponsiveDialog() {
+import { useNavigate } from "react-router-dom";
+
+import '../css/home.css'
+function ResponsiveDialog() {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -20,12 +24,16 @@ import { useContext } from "react";
 
   const handleClose = () => {
     setOpen(false);
+    if (currentUser) {
+      if (currentUser.role)
+        navigate('/donater');
+    }
   };
-const {currentUser} =useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext)
   return (
     <div>
-
-         <Button style={{ background: "#7bb28c" }} href="#" onClick={handleClickOpen}>Learn More</Button> 
+      <a onClick={handleClickOpen} className="btn btn-main btn-round-full">Learn More</a>
+      {/* <Button style={{ background: "#7bb28c" }} href="#" onClick={handleClickOpen}>Learn More</Button>  */}
 
       <Dialog
         fullScreen={fullScreen}
@@ -37,20 +45,20 @@ const {currentUser} =useContext(AuthContext)
           {"Want to enter as a donor or waiting for a donation?"}
         </DialogTitle>
         <DialogContent>
-
-            {currentUser?
-          <DialogContentText>
-           To enter your details, enter as a donor or as needing a donation from the top of the page
-          </DialogContentText>:
-          <DialogContentText>
-          To fill out your details in the desired forms, you must register in the system
-        </DialogContentText>}
+          {currentUser ?
+            currentUser.role ?
+              <DialogContentText>Hi {currentUser.role} :) ,<br></br>
+                It seems you are already logged in,
+                to see your data and update, click OK</DialogContentText> :
+              <DialogContentText>
+                To enter your details, enter as a donor or as needing a donation from the top of the page
+              </DialogContentText> :
+            <DialogContentText>
+              To fill out your details in the desired forms, you must register in the system
+            </DialogContentText>}
         </DialogContent>
         <DialogActions>
-          {/* <Button autoFocus onClick={handleClose}>
-            Disagree
-          </Button> */}
-          <Button onClick={handleClose} autoFocus>
+          <Button autoFocus onClick={handleClose} >
             OK
           </Button>
         </DialogActions>

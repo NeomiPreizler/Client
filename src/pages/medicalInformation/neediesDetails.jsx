@@ -1,12 +1,22 @@
 import React from 'react';
-
-function MedicalInformationPage1() {
+import '../css/title.css'
+function MedicalInformationNeedies() {
   return (
     <div>
       <header>
-        <nav>
-          {/* Navigation bar with logo, registration, login, and other options */}
-        </nav>
+        <section className="page-title bg-1">
+          <div className="overlay"></div>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="text-center">
+                  <div className="divider mb-3 title"></div>
+                  <h1 className="text-capitalize mb-5 text-lg">The Recipient's Information</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </header>
       <main>
         <section>
@@ -23,11 +33,11 @@ function MedicalInformationPage1() {
             evaluation helps determine your suitability for a kidney transplant and creates a baseline for the
             transplantation process.
           </p>
-          <h3>Matching and Waiting List</h3>
+          <h3>Entering the data and Waiting</h3>
           <p>
-            Once you are deemed eligible for a kidney transplant, your healthcare team will initiate the process of
-            finding a suitable donor. This involves matching your blood type, tissue compatibility, and other factors with
-            potential donors. In some cases, you may be placed on a waiting list until a matching donor becomes available.
+            Once a circle of donors is found,
+            if you and your system partner are available and compatible within the closed circle,
+            you will be notified and you can contact the donor that matches you.
           </p>
           <h3>Preparation for Transplantation</h3>
           <p>
@@ -65,4 +75,4 @@ function MedicalInformationPage1() {
   );
 }
 
-export default MedicalInformationPage1;
+export default MedicalInformationNeedies;
